@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "element-plus": "^2.6.0",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-vue-components": "^0.26.0"
+  }
+}
