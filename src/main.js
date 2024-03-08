@@ -9,7 +9,14 @@ import "element-plus/theme-chalk/index.css"; // 引入 ElementPlus 组件样式
 import ElementPlus from "element-plus"; // 引入 ElementPlus 组件
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
+// 引入ECharts
+import * as echarts from '/node_modules/.vite/deps/echarts.js?v=a78e7802';
+// Vue.prototype.$echarts = echarts
+
+
 const app = createApp(App);
+
+app.config.globalProperties.$echarts = echarts;
 
 // 全局注册 Icon 图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
