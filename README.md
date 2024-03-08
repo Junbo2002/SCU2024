@@ -1,35 +1,9 @@
-# frontend
+# SCU2024
 
-This template should help get you started developing with Vue 3 in Vite.
+> **scu2024b-team01-基于大数据的 MIR（音乐推荐）系统**
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+-   //王俊博
+-   余月
+-   文昱涵
+-   刘劲见
+    > > > > > > > 0427a09504da2a3a6156f395e6cb87382bc8e64b
