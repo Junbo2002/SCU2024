@@ -6,5 +6,5 @@
 
 <script setup>
 import SingerTop10 from "@/components/graph/SingerTop10.vue";
-import USA from "@/components/graph/USA.vue";
+import USA from "@/components/graph/WorldMap.vue";
 </script>

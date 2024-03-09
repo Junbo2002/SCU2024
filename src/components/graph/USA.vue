@@ -36,9 +36,9 @@ onMounted(() => {
     option = {
         title: {
             text: "USA Population Estimates (2012)",
-            subtext: "Data from www.census.gov",
-            sublink: "http://www.census.gov/popest/data/datasets.html",
-            left: "right",
+            // subtext: "Data from www.census.gov",
+            // sublink: "http://www.census.gov/popest/data/datasets.html",
+            left: "left",
         },
         tooltip: {
             trigger: "item",
@@ -70,7 +70,7 @@ onMounted(() => {
         toolbox: {
             show: true,
             //orient: 'vertical',
-            left: "left",
+            left: "right",
             top: "top",
             feature: {
                 dataView: { show: false },
