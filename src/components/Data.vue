@@ -4,10 +4,5 @@
 </template>
 
 <script setup>
-    import SingerTop10 from '@/components/SingerTop10.vue'
-    // export default {
-    //     components: {
-    //         SingerTop10
-    //     }
-    // }
+import SingerTop10 from "@/components/SingerTop10.vue";
 </script>
