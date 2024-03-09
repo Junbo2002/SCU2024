@@ -35,7 +35,7 @@ onMounted(() => {
     });
     option = {
         title: {
-            text: "USA Population Estimates (2012)",
+            text: "World Music Type",
             // subtext: "Data from www.census.gov",
             // sublink: "http://www.census.gov/popest/data/datasets.html",
             left: "left",
@@ -46,7 +46,9 @@ onMounted(() => {
             transitionDuration: 0.2,
         },
         visualMap: {
-            left: "right",
+            orient: 'horizontal',
+            // left: "right",
+            top: "10%",
             pieces: [
                 {gt: 900, label: 'rap', color: "#e0f3f8"},  // (900, Infinity]
                 {gt: 310, lte: 1000, label: 'blue', color: "#abd9e9"},  // (310, 1000]
@@ -99,7 +101,7 @@ onMounted(() => {
         },
         series: [
             {
-                name: "USA PopEstimates",
+                // name: "USA PopEstimates",
                 type: "map",
                 roam: true,
                 map: "World",
@@ -109,8 +111,9 @@ onMounted(() => {
                     },
                 },
                 data: [
-                    { name: "China", value: 1000},
-                    { name: "Russia", value: 150}
+                    { name: "China", value: 1200},
+                    { name: "Russia", value: 20},
+                    { name: "United States", value: 250}
 
                     
 
