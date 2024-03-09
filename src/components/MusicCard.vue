@@ -10,17 +10,17 @@
         <el-col :span="10">
             <div class="container-r">
                 <div class="title" style="margin-bottom: 15%">Believe</div>
-                <div style="margin-left: 3%">
+                <div class="data">
                     <el-icon><Avatar /></el-icon>
-                    Cher
+                    <div>Cher</div>
                 </div>
-                <div style="margin-left: 3%">
+                <div class="data">
                     <el-icon><CollectionTag /></el-icon>
-                    pop
+                    <div>pop</div>
                 </div>
-                <div style="margin-left: 3%">
+                <div class="data">
                     <el-icon><Headset /></el-icon>
-                    281445
+                    <div>281445</div>
                 </div>
             </div>
         </el-col>
@@ -38,9 +38,14 @@
     align-items: center;
     justify-content: center;
 }
-
 .container-r {
     margin-top: 25%;
     margin-left: 5%;
+}
+.data {
+    margin-left: 3%;
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
 }
 </style>
