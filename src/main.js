@@ -10,7 +10,8 @@ import ElementPlus from "element-plus"; // 引入 ElementPlus 组件
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
 // 引入ECharts
-import * as echarts from '/node_modules/.vite/deps/echarts.js?v=a78e7802';
+// import * as echarts from '/node_modules/.vite/deps/echarts.js?v=a78e7802';
+import * as echarts from 'echarts'
 // Vue.prototype.$echarts = echarts
 
 
