@@ -1,0 +1,62 @@
+{
+    "track": {
+        "name": "Naonian Style",
+        "mbid": "bba8bc34-850d-4b40-996a-13b769c190a0",
+        "url": "https://www.last.fm/music/0010110000010011+(Cancer)/_/Naonian+Style",
+        "duration": "269000",
+        "streamable": {
+            "#text": "0",
+            "fulltrack": "0"
+        },
+        "listeners": "1507",
+        "playcount": "3124",
+        "artist": {
+            "name": "0010110000010011 (Cancer)",
+            "mbid": "8aa5f7a7-e759-4a03-87fd-7cb3a34c407d",
+            "url": "https://www.last.fm/music/0010110000010011+(Cancer)"
+        },
+        "album": {
+            "artist": "Various Artists",
+            "title": "Mutazione: Italian Electronic & New Wave Underground 1980-1988",
+            "mbid": "81a775f4-4a0e-401f-b167-f8dd97453193",
+            "url": "https://www.last.fm/music/Various+Artists/Mutazione:+Italian+Electronic+&+New+Wave+Underground+1980-1988",
+            "image": [
+                {
+                    "#text": "https://lastfm.freetls.fastly.net/i/u/34s/5c3333ff6f07f5350d9d550e398e0b9b.png",
+                    "size": "small"
+                },
+                {
+                    "#text": "https://lastfm.freetls.fastly.net/i/u/64s/5c3333ff6f07f5350d9d550e398e0b9b.png",
+                    "size": "medium"
+                },
+                {
+                    "#text": "https://lastfm.freetls.fastly.net/i/u/174s/5c3333ff6f07f5350d9d550e398e0b9b.png",
+                    "size": "large"
+                },
+                {
+                    "#text": "https://lastfm.freetls.fastly.net/i/u/300x300/5c3333ff6f07f5350d9d550e398e0b9b.png",
+                    "size": "extralarge"
+                }
+            ],
+            "@attr": {
+                "position": "6"
+            }
+        },
+        "toptags": {
+            "tag": [
+                {
+                    "name": "new wave",
+                    "url": "https://www.last.fm/tag/new+wave"
+                },
+                {
+                    "name": "80's",
+                    "url": "https://www.last.fm/tag/80%27s"
+                },
+                {
+                    "name": "I want back to the 80s",
+                    "url": "https://www.last.fm/tag/I+want+back+to+the+80s"
+                }
+            ]
+        }
+    }
+}

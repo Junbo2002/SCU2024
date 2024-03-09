@@ -7,66 +7,37 @@
                 </div>
             </template>
         </el-table-column>
-        <el-table-column prop="name" label="Album" width="400">
+        <el-table-column label="Album" width="350">
             <template #default="scope">
                 <div style="display: flex; align-items: center">
                     <el-image
                         style="width: 7vw; height: 7vw"
-                        src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                        :src="scope.row.album.image[0]['#text']"
                         fit="fill" />
-                    <span class="track-name">{{ scope.row.name }}</span>
+                    <span class="track-name">{{ scope.row.album.name }}</span>
                 </div>
             </template>
         </el-table-column>
-        <el-table-column prop="listeners" label="Listeners" width="150" />
-        <el-table-column prop="playcount" label="Playcount" width="150" />
-        <el-table-column prop="tag" label="Tag">
+        <el-table-column prop="album.artist" label="Artist" width="150" />
+        <el-table-column prop="album.playcount" label="Playcount" width="150" />
+        <el-table-column label="Tag">
             <template #default="scope">
-                <el-tag round effect="plain">{{ scope.row.tag }}</el-tag>
+                <el-tag
+                    style="margin-left: 3px; margin-bottom: 3px"
+                    v-for="tag in scope.row.album.tags.tag.slice(0, 5)"
+                    :key="tag.name"
+                    round
+                    effect="plain">
+                    {{ tag.name }}
+                </el-tag>
             </template>
         </el-table-column>
     </el-table>
-    <div class="flex gap-2 mt-4"></div>
 </template>
 
 <script setup>
-const tableData = [
-    {
-        name: "Believe",
-        artist: "Cher",
-        listeners: "47602",
-        playcount: "212991",
-        tag: "pop",
-    },
-    {
-        name: "Believe",
-        artist: "Cher",
-        listeners: "47602",
-        playcount: "212991",
-        tag: "pop",
-    },
-    {
-        name: "Believe",
-        artist: "Cher",
-        listeners: "47602",
-        playcount: "212991",
-        tag: "pop",
-    },
-    {
-        name: "Believe",
-        artist: "Cher",
-        listeners: "47602",
-        playcount: "212991",
-        tag: "pop",
-    },
-    {
-        name: "Believe",
-        artist: "Cher",
-        listeners: "47602",
-        playcount: "212991",
-        tag: "pop",
-    },
-];
+import albemInfo from "@/assets/getAlbumInfo.json";
+const tableData = [albemInfo];
 </script>
 
 <style scoped>

@@ -7,60 +7,38 @@
                 </div>
             </template>
         </el-table-column>
-        <el-table-column prop="name" label="Artist" width="400">
+        <el-table-column label="Artist" width="350">
             <template #default="scope">
                 <div style="display: flex; align-items: center">
                     <el-image
                         style="width: 7vw; height: 7vw"
-                        src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                        :src="scope.row.artist.image[0]['#text']"
                         fit="fill" />
-                    <span class="track-name">{{ scope.row.name }}</span>
+                    <span class="track-name">{{ scope.row.artist.name }}</span>
                 </div>
             </template>
         </el-table-column>
-        <el-table-column prop="listeners" label="Listeners" width="150" />
-        <el-table-column prop="plays" label="Plays" width="150" />
-        <el-table-column prop="tag" label="Tag">
+        <el-table-column prop="artist.stats.listeners" label="Listeners" width="150" />
+        <el-table-column prop="artist.stats.playcount" label="Playcount" width="150" />
+        <el-table-column label="Tag">
             <template #default="scope">
-                <el-tag round effect="plain">{{ scope.row.tag }}</el-tag>
+                <el-tag
+                    style="margin-left: 3px; margin-bottom: 3px"
+                    v-for="tag in scope.row.artist.tags.tag.slice(0, 5)"
+                    :key="tag.name"
+                    round
+                    effect="plain">
+                    {{ tag.name }}
+                </el-tag>
             </template>
         </el-table-column>
     </el-table>
 </template>
 
 <script setup>
-const tableData = [
-    {
-        name: "Cher",
-        listeners: "196440",
-        plays: "1599101",
-        tag: "pop",
-    },
-    {
-        name: "Cher",
-        listeners: "196440",
-        plays: "1599101",
-        tag: "pop",
-    },
-    {
-        name: "Cher",
-        listeners: "196440",
-        plays: "1599101",
-        tag: "pop",
-    },
-    {
-        name: "Cher",
-        listeners: "196440",
-        plays: "1599101",
-        tag: "pop",
-    },
-    {
-        name: "Cher",
-        listeners: "196440",
-        plays: "1599101",
-        tag: "pop",
-    },
-];
+import artistInfo from "@/assets/getArtistInfo.json";
+const tableData = [artistInfo];
+console.log(tableData);
 </script>
 
 <style scoped>

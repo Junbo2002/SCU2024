@@ -7,19 +7,20 @@
                 </div>
             </template>
         </el-table-column>
-        <el-table-column prop="name" label="Track" width="400">
+        <el-table-column label="Track" width="350">
             <template #default="scope">
                 <div style="display: flex; align-items: center">
                     <el-image
                         style="width: 7vw; height: 7vw"
-                        src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                        :src="scope.row.track.album.image[0]['#text']"
                         fit="fill" />
-                    <span class="track-name">{{ scope.row.name }}</span>
+                    <span class="track-name">{{ scope.row.track.name }}</span>
                 </div>
             </template>
         </el-table-column>
-        <el-table-column prop="artist" label="Artist" width="180" />
-        <el-table-column prop="duration" label="Duration" :formatter="duration_formatter" />
+        <el-table-column prop="track.artist.name" label="Artist" width="150" />
+        <el-table-column prop="track.playcount" label="Playcount" width="150" />
+        <el-table-column prop="track.duration" label="Duration" :formatter="duration_formatter" />
     </el-table>
 </template>
 
@@ -37,33 +38,8 @@ const duration_formatter = (row, column, cellValue) => {
     return `${formattedMinutes}:${formattedSeconds}`;
 };
 
-const tableData = [
-    {
-        name: "Believe",
-        artist: "Cher",
-        duration: "240000",
-    },
-    {
-        name: "Believe",
-        artist: "Cher",
-        duration: "240000",
-    },
-    {
-        name: "Believe",
-        artist: "Cher",
-        duration: "",
-    },
-    {
-        name: "Believe",
-        artist: "Cher",
-        duration: "240000",
-    },
-    {
-        name: "Believe",
-        artist: "Cher",
-        duration: "240000",
-    },
-];
+import trackInfo from "@/assets/getTrackInfo.json";
+const tableData = [trackInfo];
 </script>
 
 <style scoped>
