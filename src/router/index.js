@@ -43,8 +43,12 @@ const router = createRouter({
             component: Data,
         },
         {
+            path: "/home/",
+            redirect: "/home/trackrank",
+        },
+        {
             path: "/",
-            redirect: "/home",
+            redirect: "/home/trackrank",
         },
     ],
 });

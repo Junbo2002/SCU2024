@@ -1,4 +1,6 @@
 <template>
+    <!-- <h1>{{ tableData }}</h1>
+    <h1>{{ typeof tableData[0] }}</h1> -->
     <el-table :data="tableData" style="width: 100%; font-size: medium">
         <el-table-column width="80">
             <template #default="scope">
@@ -12,15 +14,15 @@
                 <div style="display: flex; align-items: center">
                     <el-image
                         style="width: 7vw; height: 7vw"
-                        :src="scope.row.artist.image[0]['#text']"
+                        :src="scope.row.image[0]['#text']"
                         fit="fill" />
-                    <span class="track-name">{{ scope.row.artist.name }}</span>
+                    <span class="track-name">{{ scope.row.name }}</span>
                 </div>
             </template>
         </el-table-column>
-        <el-table-column prop="artist.stats.listeners" label="Listeners" width="150" />
-        <el-table-column prop="artist.stats.playcount" label="Playcount" width="150" />
-        <el-table-column label="Tag">
+        <el-table-column prop="listeners" label="Listeners" width="150" />
+        <el-table-column prop="playcount" label="Playcount" width="150" />
+        <!-- <el-table-column label="Tag">
             <template #default="scope">
                 <el-tag
                     style="margin-left: 3px; margin-bottom: 3px"
@@ -31,14 +33,27 @@
                     {{ tag.name }}
                 </el-tag>
             </template>
-        </el-table-column>
+        </el-table-column> -->
     </el-table>
 </template>
 
 <script setup>
-import artistInfo from "@/assets/getArtistInfo.json";
-const tableData = [artistInfo];
-console.log(tableData);
+import axios from "axios";
+import { ref, onMounted } from "vue";
+
+const tableData = ref([]);
+onMounted(() => {
+    axios
+        .get(
+            "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=b0d36553a3d96fb804b15692f31eaf63&format=json&limit=5"
+        )
+        .then((response) => {
+            tableData.value = response.data.artists.artist;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+});
 </script>
 
 <style scoped>
