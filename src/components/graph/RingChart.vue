@@ -41,19 +41,27 @@
         const dom1 = document.getElementById('ringChart1');
         const ringChart1 = echarts.init(dom1); // 初始化echarts实例
         const option1 = {
+            title: {
+                text: '15岁以下',
+                textStyle: {
+                    fontSize: 15,
+                },
+                top: '90%',
+                left: 'center'
+            },
             tooltip: {
                 trigger: 'item'
             },
-            legend: {
-                top: '5%',
-                left: 'center'
-            },
+            // legend: {
+            //     top: '5%',
+            //     left: 'center'
+            // },
             series: [
                 {
                 name: 'Access From',
                 type: 'pie',
                 radius: ['40%', '60%'],
-                center: ['50%', '60%'],
+                center: ['50%', '55%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 10,
@@ -91,6 +99,14 @@
         const dom2 = document.getElementById('ringChart2');
         const ringChart2 = echarts.init(dom2); // 初始化echarts实例
         const option2 = {
+            title: {
+                text: '15-25岁',
+                textStyle: {
+                    fontSize: 15,
+                },
+                top: '90%',
+                left: 'center'
+            },
             tooltip: {
                 trigger: 'item'
             },
@@ -103,7 +119,7 @@
                 name: 'Access From',
                 type: 'pie',
                 radius: ['40%', '60%'],
-                center: ['50%', '60%'],
+                center: ['50%', '55%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 10,
@@ -141,19 +157,27 @@
         const dom3 = document.getElementById('ringChart3');
         const ringChart3 = echarts.init(dom3); // 初始化echarts实例
         const option3 = {
+            title: {
+                text: '25-35岁',
+                textStyle: {
+                    fontSize: 15,
+                },
+                top: '90%',
+                left: 'center'
+            },
             tooltip: {
                 trigger: 'item'
             },
-            legend: {
-                top: '5%',
-                left: 'center'
-            },
+            // legend: {
+            //     top: '5%',
+            //     left: 'center'
+            // },
             series: [
                 {
                 name: 'Access From',
                 type: 'pie',
                 radius: ['40%', '60%'],
-                center: ['50%', '60%'],
+                center: ['50%', '55%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 10,
@@ -191,19 +215,27 @@
         const dom4 = document.getElementById('ringChart4');
         const ringChart4 = echarts.init(dom4); // 初始化echarts实例
         const option4 = {
+            title: {
+                text: '35-45岁',
+                textStyle: {
+                    fontSize: 15,
+                },
+                top: '80%',
+                left: 'center'
+            },
             tooltip: {
                 trigger: 'item'
             },
-            legend: {
-                top: '5%',
-                left: 'center'
-            },
+            // legend: {
+            //     top: '5%',
+            //     left: 'center'
+            // },
             series: [
                 {
                 name: 'Access From',
                 type: 'pie',
                 radius: ['40%', '60%'],
-                center: ['50%', '60%'],
+                center: ['50%', '45%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 10,
@@ -241,19 +273,27 @@
         const dom5 = document.getElementById('ringChart5');
         const ringChart5 = echarts.init(dom5); // 初始化echarts实例
         const option5 = {
+            title: {
+                text: '45-55岁',
+                textStyle: {
+                    fontSize: 15,
+                },
+                top: '80%',
+                left: 'center'
+            },
             tooltip: {
                 trigger: 'item'
             },
-            legend: {
-                top: '5%',
-                left: 'center'
-            },
+            // legend: {
+            //     top: '5%',
+            //     left: 'center'
+            // },
             series: [
                 {
                 name: 'Access From',
                 type: 'pie',
                 radius: ['40%', '60%'],
-                center: ['50%', '60%'],
+                center: ['50%', '45%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 10,
@@ -291,19 +331,27 @@
         const dom6 = document.getElementById('ringChart6');
         const ringChart6 = echarts.init(dom6); // 初始化echarts实例
         const option6 = {
+            title: {
+                text: '55岁以上',
+                textStyle: {
+                    fontSize: 15,
+                },
+                top: '80%',
+                left: 'center'
+            },
             tooltip: {
                 trigger: 'item'
             },
-            legend: {
-                top: '5%',
-                left: 'center'
-            },
+            // legend: {
+            //     top: '5%',
+            //     left: 'center'
+            // },
             series: [
                 {
                 name: 'Access From',
                 type: 'pie',
                 radius: ['40%', '60%'],
-                center: ['50%', '60%'],
+                center: ['50%', '45%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 10,
