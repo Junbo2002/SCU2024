@@ -1,9 +1,8 @@
 import pickle
 
-# 读取数据
-with open('playlist_track_sentences.pkl', 'rb') as f:
-    sentences = pickle.load(f)
+trackid_playcount = {"111": 123, "222": 456, "333": 789}
 
-print(sentences)
-print(len(sentences))
+with open('./data/trackid_playcount.pkl', 'wb') as f:
+    pickle.dump(trackid_playcount, f)
 
+print(len(trackid_playcount))

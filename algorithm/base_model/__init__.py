@@ -1,8 +1,8 @@
-from popular_model import PopularModel
-from multi_road_recall import MultiRoadRecallModel
-from user_cf import UserCFModel
-from item_cf import ItemCFModel
-from tag_model import TagModel
+from .popular_model import PopularModel
+from .multi_road_recall import MultiRoadRecallModel
+from .user_cf import UserCFModel
+from .item_cf import ItemCFModel
+from .tag_model import TagModel
 
 
 class BaseModelFactory:

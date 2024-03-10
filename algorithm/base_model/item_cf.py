@@ -1,4 +1,4 @@
-from base_rec_model import BaseRecModel
+from .base_rec_model import BaseRecModel
 
 
 class ItemCFModel(BaseRecModel):
