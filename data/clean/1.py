@@ -15,7 +15,7 @@ import pickle
 file = "../minidata/data/track_ids.pkl"
 with open(file, 'rb') as f:
     track_ids = set(pickle.load(f))
-
+print(len(track_ids))
 file = "../minidata/data/user_ids.pkl"
 with open(file, 'rb') as f:
     user_ids = set(pickle.load(f))

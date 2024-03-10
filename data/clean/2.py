@@ -59,41 +59,51 @@ with open(file, 'rb') as f:
 
 file = "../minidata/data/track_ids.pkl"
 with open(file, 'rb') as f:
-    track_ids = set(pickle.load(f))
+    track_ids = pickle.load(f)
+
+track_map = {track_id: idx for idx, track_id in enumerate(track_ids)}
+file = "../minidata/data/track_map.pkl"
+with open(file, 'wb') as f:
+    pickle.dump(track_map, f)
 
 file = "../minidata/data/user_ids.pkl"
 with open(file, 'rb') as f:
     user_ids = pickle.load(f)
 user_dict = {user_id: idx for idx, user_id in enumerate(user_ids)}
-file = "../minidata/data/user_dict.pkl"
-with open(file, 'wb') as f:
-    pickle.dump(user_dict, f)
+# file = "../minidata/data/user_dict.pkl"
+# with open(file, 'wb') as f:
+#     pickle.dump(user_dict, f)
 
 file = "C:/Users/HP/Desktop/音乐推荐/entities/mini_tracks.idomaar"
 track_dict = {track_id: [] for track_id in track_ids}
+track_tag_vector = [[0] * len(tag_dict) for _ in range(len(track_ids))]
 with open(file, 'r', encoding='utf-8') as f:
     lines = f.readlines()
     for line in tqdm(lines):
         track_id = str(line.split('\t')[1])
         tags = json.loads(line.split('\t')[-1])["tags"]
-        track_dict[track_id] = [tag["id"] for tag in tags if str(tag["id"]) in tag_dict]
+        for tag in tags:
+            tag_id = str(tag["id"])
+            if tag_id not in tag_dict: continue
+            # track_dict[track_id].append(tag_id)
+            track_tag_vector[track_map[track_id]][tag_dict[tag_id]] = 1
 
 
-file = "C:/Users/HP/Desktop/sql/preference.sql"
-res = [[0] * len(tag_dict) for _ in range(len(user_dict))]
-import re
-pattern = re.compile(r"VALUES (.*);")
-with open(file, 'r', encoding='utf-8') as f:
-    lines = f.readlines()
-    for line in tqdm(lines):
-        _, user_id, track_id = eval(pattern.findall(line)[0])
-        if user_id not in user_dict or track_id not in track_ids: continue
-        for tag_id in track_dict[track_id]:
-            res[user_dict[user_id]][tag_dict[str(tag_id)]] += 1
+# file = "C:/Users/HP/Desktop/sql/preference.sql"
+# res = [[0] * len(tag_dict) for _ in range(len(user_dict))]
+# import re
+# pattern = re.compile(r"VALUES (.*);")
+# with open(file, 'r', encoding='utf-8') as f:
+#     lines = f.readlines()
+#     for line in tqdm(lines):
+#         _, user_id, track_id = eval(pattern.findall(line)[0])
+#         if user_id not in user_dict or track_id not in track_ids: continue
+#         for tag_id in track_dict[track_id]:
+#             res[user_dict[user_id]][tag_dict[str(tag_id)]] += 1
 
 # 存为稀疏矩阵
-res = [sparse.csr_matrix(vector) for vector in res]
-file = "../minidata/data/user_tag_vector.pkl"
+res = sparse.csr_matrix(track_tag_vector)
+file = "../minidata/data/track_tag_vector.pkl"
 with open(file, 'wb') as f:
     pickle.dump(res, f)
 print(len(res))

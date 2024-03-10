@@ -18,8 +18,7 @@ class TagModel(BaseRecModel):
         self.user_tags = self._get_user_tags()  # [24184, 3865]
         self.user_dict = self._get_user_dict()
         self.tag_dict = self._get_tag_dict()
-        self.user_item_sim = cosine_similarity(self.user_tags, self.item_tags, dense_output=False)
-
+        # self.user_item_sim = cosine_similarity(self.user_tags, self.item_tags, dense_output=False)
 
     def recall(self, user_id, top_n):
         """
@@ -31,11 +30,14 @@ class TagModel(BaseRecModel):
         # sims = sim[0, top_n_idx]
 
         # 提前存储相似度矩阵
-        file = f"datasets/user_item_sim/{user_id}.npy"
-        sim = np.load(file)
-        top_n_idx = np.argpartition(sim, -top_n)[0, -top_n:]
-        # sims = sim[0, top_n_idx]
-        return self._get_top_n(sim, top_n)
+        # file = f"datasets/user_item_sim/{user_id}.npy"
+        # sim = np.load(file)
+        sim = cosine_similarity(self.user_tags[0], self.item_tags, dense_output=True)
+        sim = sim.squeeze(0)
+        top_n_idx = np.argpartition(sim, -top_n)[-top_n:]
+        sims = np.zeros_like(sim)
+        sims[top_n_idx] = sim[top_n_idx]
+        return sims
 
     def _get_top_n(self, sim, top_n) -> list:
         raise NotImplementedError

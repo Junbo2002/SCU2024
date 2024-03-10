@@ -19,3 +19,9 @@ List[sparse matrix]
 List[sparse matrix]
 
 24184
+
+> user_dict.pkl
+
+映射用户id到0-idx
+
+{user_id: 0-idx}
