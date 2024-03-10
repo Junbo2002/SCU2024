@@ -1,0 +1,40 @@
+from .base_rec_model import BaseRecModel
+import numpy as np
+
+
+class MultiRoadRecallModel(BaseRecModel):
+    def __init__(self):
+        super(MultiRoadRecallModel, self).__init__()
+        self.models = []
+
+    def recall(self, user_id, top_n, p="mean"):
+        """
+        多路召回，返回top_n的推荐结果
+        暂时使用平均召回
+        """
+        recall_lst = []
+        for model in self.models:
+            if not isinstance(model, BaseRecModel):
+                raise TypeError("model must be an instance of BaseRecModel")
+            recall_res = model.recall(user_id, top_n)
+            # normalize !!!
+            recall_res = recall_res / recall_res.sum()
+            # recall_res = \
+            #     (recall_res - recall_res.mean()) / recall_res.std()
+            recall_lst.append(recall_res)
+
+        if p == "mean":
+            res = np.array(recall_lst).mean(axis=0)
+            top_n_idx = np.argpartition(res, -top_n)[-top_n:]
+            return res[top_n_idx], top_n_idx
+        else:
+            raise NotImplementedError
+
+    def add_model(self, model):
+        if isinstance(model, list):
+            for m in model:
+                self.add_model(m)
+        elif isinstance(model, BaseRecModel):
+            self.models.append(model)
+        else:
+            raise TypeError("model must be an instance of BaseRecModel")
