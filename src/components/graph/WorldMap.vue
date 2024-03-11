@@ -103,7 +103,7 @@ onMounted(() => {
             {
                 // name: "USA PopEstimates",
                 type: "map",
-                roam: true,
+                // roam: true,
                 map: "World",
                 emphasis: {
                     label: {
