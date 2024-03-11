@@ -46,35 +46,35 @@ onMounted(() => {
             transitionDuration: 0.2,
         },
         visualMap: {
-            orient: 'horizontal',
+            orient: "horizontal",
             // left: "right",
             top: "10%",
             pieces: [
-                {gt: 900, label: 'rap', color: "#e0f3f8"},  // (900, Infinity]
-                {gt: 310, lte: 1000, label: 'blue', color: "#abd9e9"},  // (310, 1000]
-                {gt: 200, lte: 300, label: 'jazz', color: "#74add1"},   // (200, 300]
-                {gt: 10, lte: 200, label: 'pop', color: "#3189ff"},       // (10, 200]
+                { gt: 900, label: "rap", color: "#e0f3f8" }, // (900, Infinity]
+                { gt: 310, lte: 1000, label: "blue", color: "#abd9e9" }, // (310, 1000]
+                { gt: 200, lte: 300, label: "jazz", color: "#74add1" }, // (200, 300]
+                { gt: 10, lte: 200, label: "pop", color: "#3189ff" }, // (10, 200]
                 // {value: 123, label: '123（自定义特殊颜色）', color: "#313695"},  // [123, 123]
                 // {lt: 5}                 // (-Infinity, 5)
             ],
             //             categories: ['重度污染', '中度污染', '轻度污染', '良', '优'],
             // dimension: 1,
 
-            // splitList: [   
-            //     {start: 500, end:600},{start: 400, end: 500},  
-            //     {start: 300, end: 400},{start: 200, end: 300},  
-            //     {start: 100, end: 200}  
-            // ], 
+            // splitList: [
+            //     {start: 500, end:600},{start: 400, end: 500},
+            //     {start: 300, end: 400},{start: 200, end: 300},
+            //     {start: 100, end: 200}
+            // ],
 
             // inRange: {
 
-                // color: [
-                //     "#313695",
-                //     "#3189ff",
-                //     "#74add1",
-                //     "#abd9e9",
-                //     "#e0f3f8",
-                // ],
+            // color: [
+            //     "#313695",
+            //     "#3189ff",
+            //     "#74add1",
+            //     "#abd9e9",
+            //     "#e0f3f8",
+            // ],
 
             // },
             // text: ["High", "Low"],
@@ -96,14 +96,14 @@ onMounted(() => {
             },
         },
         legend: {
-        //     data: ["China"],
-        //     show: true
+            //     data: ["China"],
+            //     show: true
         },
         series: [
             {
                 // name: "USA PopEstimates",
                 type: "map",
-                roam: true,
+                roam: false,
                 map: "World",
                 emphasis: {
                     label: {
@@ -111,12 +111,9 @@ onMounted(() => {
                     },
                 },
                 data: [
-                    { name: "China", value: 1200},
-                    { name: "Russia", value: 20},
-                    { name: "United States", value: 250}
-
-                    
-
+                    { name: "China", value: 1200 },
+                    { name: "Russia", value: 20 },
+                    { name: "United States", value: 250 },
 
                     // { name: "Alaska", value: 731449 },
                     // { name: "Arizona", value: 6553255 },

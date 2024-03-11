@@ -1,7 +1,10 @@
 <template>
     <el-aside width="16vw">
         <h1 style="margin-left: 1vw">音乐推荐系统</h1>
-        <el-menu router :default-active="this.$route.path" style="height: 100vh">
+        <el-menu
+            router
+            :default-active="this.$route.path"
+            style="height: 100vh; background-color: #f5f7fa">
             <el-menu-item index="/home">
                 <el-icon><Menu /></el-icon>
                 <span>首页</span>

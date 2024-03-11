@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
+import axios from "axios";
 
 const props = defineProps({
     data: Object,
@@ -14,8 +15,9 @@ const loadedData = ref({
         name: "",
     },
     toptags: {
-        tag: [],
+        tag: [{ name: "" }],
     },
+    image: "",
 });
 
 onMounted(() => {
@@ -23,7 +25,17 @@ onMounted(() => {
         () => props.data, // 监听的目标数据
         (newValue) => {
             loadedData.value = newValue;
-            console.log(loadedData.value);
+            axios
+                .get(
+                    `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=b0d36553a3d96fb804b15692f31eaf63&mbid=${loadedData.value.mbid}&format=json`
+                )
+                .then((response) => {
+                    // console.log(response.data.track.album.image[0]["#text"]);
+                    loadedData.value.image = response.data.track.album.image[3]["#text"];
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
     );
 });
@@ -34,8 +46,8 @@ onMounted(() => {
         <el-col :span="14"
             ><div class="container-l">
                 <el-image
-                    style="width: 90%; height: 80%"
-                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+                    style="width: 80%; height: 70%; border-radius: 20px"
+                    :src="loadedData.image"
                     fit="fill" /></div
         ></el-col>
         <el-col :span="10">
@@ -47,7 +59,14 @@ onMounted(() => {
                 </div>
                 <div class="data">
                     <el-icon><CollectionTag /></el-icon>
-                    <div v-for="tag in loadedData.toptags.tag" :key="tag">{{ tag.name }}</div>
+                    <el-tag
+                        effect="plain"
+                        size="small"
+                        round
+                        style="background-color: transparent"
+                        >{{ loadedData.toptags.tag[0].name }}</el-tag
+                    >
+                    <!-- <div v-for="tag in loadedData.toptags.tag" :key="tag">{{ tag.name }}</div> -->
                 </div>
                 <div class="data">
                     <el-icon><Headset /></el-icon>
@@ -60,7 +79,7 @@ onMounted(() => {
 
 <style scoped>
 .title {
-    font-size: 5vh;
+    font-size: 2vw;
     font-weight: bold;
 }
 .container-l {
@@ -71,7 +90,7 @@ onMounted(() => {
 }
 .container-r {
     margin-top: 25%;
-    margin-left: 5%;
+    margin-left: 0;
 }
 .data {
     margin-left: 3%;
