@@ -1,6 +1,7 @@
 <script setup>
 import MusicCard from "@/components/MusicCard.vue";
 import { ref, onBeforeMount, onMounted } from "vue";
+import { $background, $p_carousel_item, $a_carousel_item } from "@/assets/theme.js";
 import axios from "axios";
 
 const ids = ref([]);
@@ -20,9 +21,9 @@ const carouselChange = (now) => {
 
     const carousel_last_item = document.getElementById(carousel_last_item_id);
     const carousel_next_item = document.getElementById((carouselId.value % 5) + 1);
-    carousel_last_item.style.backgroundColor = "#ecf5ff";
-    carousel_next_item.style.backgroundColor = "#ecf5ff";
-    carousel_item.style.backgroundColor = "#ecf5ff";
+    carousel_last_item.style.backgroundColor = $p_carousel_item;
+    carousel_next_item.style.backgroundColor = $p_carousel_item;
+    carousel_item.style.backgroundColor = $a_carousel_item;
 };
 
 onBeforeMount(() => {
@@ -48,16 +49,22 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
-    document.getElementById(1).style.backgroundColor = "lightblue";
+    document.getElementById(1).style.backgroundColor = $a_carousel_item;
+    for (let i = 2; i < 6; i++) {
+        document.getElementById(i).style.backgroundColor = $p_carousel_item;
+    }
 });
 </script>
 
 <template>
+    <div style="height: 20vh"></div>
     <el-carousel
+        indicator-position="outside"
         :interval="400000"
         type="card"
         height="42vh"
         @change="carouselChange"
+        :style="{ backgroundColor: $background }"
         ref="carousel">
         <el-carousel-item v-for="index in 5" :key="index" :id="index">
             <MusicCard :data="recommends[index - 1]" />
@@ -75,13 +82,7 @@ onMounted(() => {
     background-color: rgb(240,240,240)
 } */
 
-.el-carousel {
-    background-color: #f5f7fa;
-}
-
 .el-carousel__item {
-    background-color: rgba(242, 246, 252, 0.95);
-    /* background-color: blue; */
     border-radius: 10px;
     box-shadow: 5px 5px 1vh 1px rgba(0, 0, 0, 0.3);
     height: 38vh;

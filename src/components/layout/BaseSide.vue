@@ -4,23 +4,26 @@
         <el-menu
             router
             :default-active="this.$route.path"
-            style="height: 100vh; background-color: #f5f7fa">
+            style="height: 100vh"
+            :style="{ backgroundColor: $background }">
             <el-menu-item index="/home">
-                <el-icon><Menu /></el-icon>
-                <span>首页</span>
+                <el-icon><TrophyBase /></el-icon>
+                <span>排行榜</span>
             </el-menu-item>
             <el-menu-item index="/music">
                 <el-icon><Headset /></el-icon>
                 <span>音乐推荐</span>
             </el-menu-item>
             <el-menu-item index="/data">
-                <el-icon><Histogram /></el-icon>
+                <el-icon><PieChart /></el-icon>
                 <span>数据可视化</span>
             </el-menu-item>
         </el-menu>
     </el-aside>
 </template>
 
-<script setup></script>
+<script setup>
+import { $background } from "@/assets/theme.js";
+</script>
 
 <style scoped></style>
