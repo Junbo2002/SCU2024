@@ -14,7 +14,7 @@
                 <div style="display: flex; align-items: center">
                     <el-image
                         style="width: 7vw; height: 7vw"
-                        :src="scope.row.image[0]['#text']"
+                        :src="scope.row.image[3]['#text']"
                         fit="fill" />
                     <span class="track-name">{{ scope.row.name }}</span>
                 </div>

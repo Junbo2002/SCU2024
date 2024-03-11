@@ -12,7 +12,7 @@
                 <div style="display: flex; align-items: center">
                     <el-image
                         style="width: 7vw; height: 7vw"
-                        :src="scope.row.album.image[0]['#text']"
+                        :src="scope.row.album.image[3]['#text']"
                         fit="fill" />
                     <span class="track-name">{{ scope.row.album.name }}</span>
                 </div>
