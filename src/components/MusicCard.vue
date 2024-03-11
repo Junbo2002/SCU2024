@@ -1,3 +1,34 @@
+<script setup>
+import { onMounted, ref, watch } from "vue";
+
+const props = defineProps({
+    data: Object,
+});
+const loadedData = ref({
+    name: "",
+    mbid: "",
+    duration: "",
+    listeners: "",
+    playcount: "",
+    artist: {
+        name: "",
+    },
+    toptags: {
+        tag: [],
+    },
+});
+
+onMounted(() => {
+    watch(
+        () => props.data, // 监听的目标数据
+        (newValue) => {
+            loadedData.value = newValue;
+            console.log(loadedData.value);
+        }
+    );
+});
+</script>
+
 <template>
     <el-row>
         <el-col :span="14"
@@ -9,25 +40,23 @@
         ></el-col>
         <el-col :span="10">
             <div class="container-r">
-                <div class="title" style="margin-bottom: 15%">Believe</div>
+                <div class="title" style="margin-bottom: 15%">{{ loadedData.name }}</div>
                 <div class="data">
                     <el-icon><Avatar /></el-icon>
-                    <div>Cher</div>
+                    <div>{{ loadedData.artist.name }}</div>
                 </div>
                 <div class="data">
                     <el-icon><CollectionTag /></el-icon>
-                    <div>pop</div>
+                    <div v-for="tag in loadedData.toptags.tag" :key="tag">{{ tag.name }}</div>
                 </div>
                 <div class="data">
                     <el-icon><Headset /></el-icon>
-                    <div>281445</div>
+                    <div>{{ loadedData.playcount }}</div>
                 </div>
             </div>
         </el-col>
     </el-row>
 </template>
-
-<script setup></script>
 
 <style scoped>
 .title {
