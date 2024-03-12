@@ -1,25 +1,55 @@
 <template>
-    <el-container>
-    <el-header style="text-align: center; font-size: 4vh; background-color: lightblue; height: 8vh;">
-        <el-text class="mx-1" tag="b" style="align-items: center">Your ID:</el-text>
-        <!-- <div class="toolbar">
-          <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px"
-              ><setting
-            /></el-icon>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <span>Tom</span>
-        </div> -->
-      </el-header>
+  <el-container>
+    <el-header class="custom-header">
+      <div class="left-text">Hi!</div>
+      <div class="right-text">{{ data.name }}</div>
+    </el-header>
     <el-main><slot></slot></el-main>
-</el-container>
+  </el-container>
 </template>
 
-<script setup></script>
+<script setup>
+import axios from "axios";
+import { ref, onMounted } from "vue";
+
+const data = ref({ name: '' });
+
+onMounted(() => {
+  axios
+    .get(
+      "http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=alex-devil&api_key=b0d36553a3d96fb804b15692f31eaf63&format=json"
+    )
+    .then((response) => {
+      data.value = response.data.user;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});
+</script>
+
+<style>
+.custom-header {
+  display: flex;
+  align-items: center;
+  /* background-color: #e9e9eb; */
+  background-image: linear-gradient(-90deg, white, #e9e9eb, #e9e9eb, #e9e9eb, white);
+  height: 7vh;
+  gap: 10px;
+}
+
+.left-text {
+  order: 1;
+  p{font-family:"Times New Roman", Times, serif;}
+  font-weight: bold;
+  font-size: 2.5vh; 
+  margin-left: 65vw;
+}
+
+.right-text {
+  order: 2;
+  p{font-family:"Times New Roman", Times, serif;}
+  font-weight: bold;
+  font-size: 2.5vh; 
+}
+</style>
