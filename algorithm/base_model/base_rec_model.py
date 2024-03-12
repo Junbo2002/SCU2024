@@ -7,7 +7,7 @@ class BaseRecModel:
         self.base_path = "dataset/data/"
         pass
 
-    def recall(self, user_id, top_n):
+    def recall(self, user_id, top_n, filtered_tracks=None):
         """
         Get top n recommendation result for user
         """
@@ -40,3 +40,11 @@ class BaseRecModel:
         with open(data_path, 'rb') as f:
             tag_dict = pickle.load(f)
         return tag_dict
+
+    def _get_user_track_matrix(self):
+        data_path = self.base_path + "user_track_matrix.pkl"
+        with open(data_path, 'rb') as f:
+            user_track_matrix = pickle.load(f)
+        return user_track_matrix
+
+

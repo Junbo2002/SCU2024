@@ -10,7 +10,7 @@ class PopularModel(BaseRecModel):
         super(PopularModel, self).__init__()
         self.track_ids, self.track_probs = self._get_popular_items()
 
-    def recall(self, user_id, top_n):
+    def recall(self, user_id, top_n, filtered_tracks=None):
         """
         与用户无关，返回热门的top_n个歌曲
         """

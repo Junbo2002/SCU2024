@@ -20,7 +20,7 @@ class TagModel(BaseRecModel):
         self.tag_dict = self._get_tag_dict()
         # self.user_item_sim = cosine_similarity(self.user_tags, self.item_tags, dense_output=False)
 
-    def recall(self, user_id, top_n):
+    def recall(self, user_id, top_n, filtered_tracks=None):
         """
         根据用户喜欢的歌曲获得用户标签，然后计算用户标签与歌曲标签的相似度，返回top_n的歌曲
         """

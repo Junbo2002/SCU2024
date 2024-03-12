@@ -1,4 +1,4 @@
-from base_rec_model import BaseRecModel
+from .base_rec_model import BaseRecModel
 import pickle
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -7,7 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 class UserCFModel(BaseRecModel):
     def __init__(self):
         super(UserCFModel, self).__init__()
-        self.base_path = "../" + self.base_path
+        # self.base_path = "../" + self.base_path
 
         # self.item_tags = self._get_item_tags()  # [138153, 3865]
         self.user_tags = self._get_user_tags()  # [24184, 3865]
@@ -43,12 +43,6 @@ class UserCFModel(BaseRecModel):
         sims = np.zeros_like(user_tracks)
         sims[top_n_idx] = user_tracks[top_n_idx]
         return sims
-
-    def _get_user_track_matrix(self):
-        data_path = self.base_path + "user_track_matrix.pkl"
-        with open(data_path, 'rb') as f:
-            user_track_matrix = pickle.load(f)
-        return user_track_matrix
 
 
 if __name__ == '__main__':

@@ -10,7 +10,7 @@ class MultiRoadRecallModel(BaseRecModel):
         self.track_map = {v: k for k, v in track_map.items()}
         self.models = []
 
-    def recall(self, user_id, top_n, p="mean"):
+    def recall(self, user_id, top_n, p="mean", filtered_tracks=None):
         """
         多路召回，返回top_n的推荐结果
         暂时使用平均召回
@@ -19,9 +19,10 @@ class MultiRoadRecallModel(BaseRecModel):
         for model in self.models:
             if not isinstance(model, BaseRecModel):
                 raise TypeError("model must be an instance of BaseRecModel")
-            recall_res = model.recall(user_id, top_n)
+
+            recall_res = model.recall(user_id, top_n, filtered_tracks=filtered_tracks)
             # normalize !!!
-            recall_res = recall_res / recall_res.sum()
+            recall_res = recall_res / (recall_res.sum() + 1e-5)
             # recall_res = \
             #     (recall_res - recall_res.mean()) / recall_res.std()
             recall_lst.append(recall_res)
@@ -29,8 +30,8 @@ class MultiRoadRecallModel(BaseRecModel):
         if p == "mean":
             res = np.array(recall_lst).mean(axis=0)
             top_n_idx = np.argpartition(res, -top_n)[-top_n:]
-            track_ids = [self.track_map[i] for i in top_n_idx]
-            return res[top_n_idx].tolist(), track_ids
+            # track_ids = [self.track_map[i] for i in top_n_idx]
+            return res[top_n_idx].tolist(), top_n_idx
         else:
             raise NotImplementedError
 
