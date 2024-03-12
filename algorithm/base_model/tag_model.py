@@ -49,29 +49,6 @@ class TagModel(BaseRecModel):
 
         return self.user_tags[self.user_dict[user_id]]
 
-    def _get_item_tags(self) -> list:
-        data_path = "datasets/data/track_tag_vector.pkl"
-        with open(data_path, 'rb') as f:
-            item_tags = pickle.load(f)
-        return item_tags
-
-    def _get_user_tags(self) -> list:
-        data_path = "datasets/data/user_tag_vector.pkl"
-        with open(data_path, 'rb') as f:
-            user_tags = pickle.load(f)
-        return user_tags
-
-    def _get_user_dict(self) -> dict:
-        data_path = "datasets/data/user_dict.pkl"
-        with open(data_path, 'rb') as f:
-            user_dict = pickle.load(f)
-        return user_dict
-
-    def _get_tag_dict(self) -> dict:
-        data_path = "datasets/data/tag_dict.pkl"
-        with open(data_path, 'rb') as f:
-            tag_dict = pickle.load(f)
-        return tag_dict
 
     # def sparse_cosine_similarity(self, vector1, vector2):  # 将稀疏向量转换为稀疏矩阵(已优化)
     #     # sparse_matrix1 = sparse.csr_matrix(vector1)

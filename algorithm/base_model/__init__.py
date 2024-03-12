@@ -4,6 +4,8 @@ from .user_cf import UserCFModel
 from .item_cf import ItemCFModel
 from .tag_model import TagModel
 
+base_path = "algorithm/datasets/data/"
+
 
 class BaseModelFactory:
     def __init__(self):

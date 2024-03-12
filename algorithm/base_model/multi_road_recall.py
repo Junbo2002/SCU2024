@@ -1,10 +1,13 @@
 from .base_rec_model import BaseRecModel
 import numpy as np
+import pickle
 
 
 class MultiRoadRecallModel(BaseRecModel):
     def __init__(self):
         super(MultiRoadRecallModel, self).__init__()
+        track_map = pickle.load(open(self.base_path + "track_map.pkl", "rb"))
+        self.track_map = {v: k for k, v in track_map.items()}
         self.models = []
 
     def recall(self, user_id, top_n, p="mean"):
@@ -26,7 +29,8 @@ class MultiRoadRecallModel(BaseRecModel):
         if p == "mean":
             res = np.array(recall_lst).mean(axis=0)
             top_n_idx = np.argpartition(res, -top_n)[-top_n:]
-            return res[top_n_idx], top_n_idx
+            track_ids = [self.track_map[i] for i in top_n_idx]
+            return res[top_n_idx].tolist(), track_ids
         else:
             raise NotImplementedError
 

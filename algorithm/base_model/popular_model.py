@@ -20,7 +20,9 @@ class PopularModel(BaseRecModel):
         return sims
 
     def _get_popular_items(self):
-        data_path = "datasets/data/trackid_playcount.pkl"
+        import os
+        print(os.getcwd())
+        data_path = self.base_path + "trackid_playcount.pkl"
         with open(data_path, 'rb') as f:
             trackid_playcount = pickle.load(f)
 
