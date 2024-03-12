@@ -19,3 +19,5 @@ class BaseModelFactory:
 
     def get_model(self, model_name):
         return self.model_map[model_name]()
+
+
