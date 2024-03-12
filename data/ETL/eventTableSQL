@@ -1,0 +1,44 @@
+import pickle
+import json
+import tqdm
+
+# 读取用户字典和轨迹映射
+with open("E:/Code/sxflights/user_dict.pkl", 'rb') as f:
+    user_dict = pickle.load(f)
+
+with open("E:/Code/sxflights/track_map.pkl", 'rb') as f:
+    track_map = pickle.load(f)
+
+# 打开文件并读取数据
+file = "C:/Users/Lenovo/Desktop/relations/events.idomaar"
+with open(file, "r") as f:
+    lines = f.readlines()
+
+# 生成 SQL 语句列表
+sql_statements = []
+for line in tqdm(lines):
+    line = line.split("\t")
+    data = line
+    playtime = json.loads(data[3])
+    items = json.loads(data[4])
+    user_id = items["subjects"][0]["id"]
+    track_id = items["objects"][0]["id"]
+
+    user_id, track_id = str(user_id), str(track_id)
+    if user_id not in user_dict or track_id not in track_id:
+        continue
+
+    # sql = "INSERT INTO event (`id`, `user_id`, `track_id`, `playtime`, `timestamp`) VALUES (%s, %s, %s, %s, %s)"
+    # val = (data[1], items["subjects"][0]["id"], items["objects"][0]["id"], playtime["playtime"], data[2])
+
+    sql = "INSERT INTO `event` VALUES ('" + str(data[1]) + "', '" + str(items["subjects"][0]["id"]) + "', '" + str(items["objects"][0]["id"]) + "', '" + str(playtime["playtime"]) + "', '" + str(data[2]) + "');"
+    # 将 SQL 语句和参数添加到列表中
+    sql_statements.append(sql)
+
+# 将 SQL 语句写入文件
+with open("C:/Users/Lenovo/Desktop/relations/output.sql", "w") as f:
+    for i in sql_statements:
+        f.write(i)
+        f.write("\n")
+
+print("SQL 语句生成成功")
