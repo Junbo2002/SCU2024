@@ -1,5 +1,6 @@
 import json
 import mysql.connector
+import numpy as np
 
 db = mysql.connector.connect(
     host="172.16.0.176",  # 数据库主机地址
@@ -17,6 +18,9 @@ db_large = mysql.connector.connect(
 )
 cursor_large = db_large.cursor()
 
+
+# 定义一些常量
+country_map = json.load(open("assets/data/country_map.json", 'r', encoding='utf-8'))
 
 # ========================
 # tracks
@@ -74,7 +78,14 @@ def get_avg_playcount_by_nationality():
 
     cursor_large.execute(sql)
     res = cursor_large.fetchall()
-    objs = {obj[0]: int(obj[1]) for obj in res}
+
+    objs = []
+    for abbr, cnt in res:
+        if abbr not in country_map: continue
+        objs.append({
+            "name": country_map[abbr],
+            "value": int(cnt)  # 数据分布更加集中
+        })
     return objs
 
 
@@ -89,7 +100,13 @@ def get_cnt_by_nationality():
 
     cursor_large.execute(sql)
     res = cursor_large.fetchall()
-    objs = {obj[0]: int(obj[1]) for obj in res}
+    objs = []
+    for abbr, cnt in res:
+        if abbr not in country_map: continue
+        objs.append({
+            "name": country_map[abbr],
+            "value": np.log(cnt)  # 数据分布更加集中
+        })
     return objs
 
 
@@ -160,4 +177,5 @@ def get_gender_users():
 
 if __name__ == '__main__':
     #  [18, 35, 50]
-    print(get_top_tracks())
+    print(get_avg_playcount_by_nationality())
+    json.dump(get_avg_playcount_by_nationality(), open("assets/data/test.json", "w"), ensure_ascii=False, indent=4)
