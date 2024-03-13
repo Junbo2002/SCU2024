@@ -7,7 +7,7 @@ mydb = mysql.connector.connect(
     host="172.16.0.176",  # 数据库主机地址
     user="root",  # 数据库用户名
     passwd="admin",  # 数据库密码
-    database="minidata"
+    database="bigdata"
 )
 cursor = mydb.cursor()
 
@@ -29,7 +29,7 @@ with open(file, "r") as f:
         track_id = items["objects"][0]["id"]
 
         user_id, track_id = str(user_id), str(track_id)
-        if user_id not in user_dict or track_id not in track_id:
+        if user_id not in user_dict or track_id not in track_map:
             continue
 
         sql = "INSERT INTO event (`id`, `user_id`, `track_id`, `playtime`, `timestamp`) VALUES (%s, %s, %s, %s, %s)"
