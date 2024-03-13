@@ -179,7 +179,7 @@ export default {
   align-items: center;
   justify-content: center;
   height: 10vh;
-  background-color: pink;
+  /* background-color: pink; */
 }
 
 .slider-demo-block {
