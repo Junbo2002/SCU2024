@@ -52,7 +52,9 @@ onMounted(() => {
         ></el-col>
         <el-col :span="10">
             <div class="container-r">
-                <div class="title" style="margin-bottom: 15%">{{ loadedData.name }}</div>
+                <div class="title" style="margin-bottom: 15%; max-height: 6vw">
+                    {{ loadedData.name }}
+                </div>
                 <div class="data">
                     <el-icon><Avatar /></el-icon>
                     <div>{{ loadedData.artist.name }}</div>

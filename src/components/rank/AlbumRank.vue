@@ -37,7 +37,6 @@
 
 <script setup>
 import albemInfo from "@/assets/getAlbumInfo.json";
-import { $rank_list } from "@/assets/theme";
 const tableData = [albemInfo];
 </script>
 

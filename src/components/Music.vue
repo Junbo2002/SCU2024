@@ -28,11 +28,16 @@ const carouselChange = (now) => {
 
 onBeforeMount(() => {
     ids.value = [
-        "1407cad7-82bd-487b-b127-5126f174fe8b",
-        "80f2a7b2-916c-4de6-a9ca-e0bb7697b923",
-        "20d2bfd1-2a81-4e60-a9f3-e67bff04e0e9",
-        "d0f4d334-231d-4529-811b-595390986623",
-        "4fc88a59-2d09-4736-a18d-e96bde02961f",
+        "638f3fc4-9772-4ef6-ac88-ed4645a7492c",
+        "36c9d819-c497-4ac0-a53c-88586a450043",
+        "0c920ec7-e71e-45c7-a682-e94ead1c8512",
+        "f7a9accf-fac8-40d7-b84e-948d3bed32a6",
+        "a9a88d65-dafb-48fd-893e-abd36781d0e8",
+        "7f2f5d42-2e12-49cb-8659-4722df2eaa98",
+        "65ce5ddf-d781-460f-a553-84a7f39ab8eb",
+        "46a4d442-31f5-4118-8075-a869b5319b28",
+        "0adb9188-be23-4be2-bc6a-f55ab7664019",
+        "988329a8-42c4-40b5-9c4b-0ccc63797076",
     ];
     for (const id of ids.value) {
         axios

@@ -3,7 +3,7 @@
         <h1 style="margin-left: 1vw">音乐推荐系统</h1>
         <el-menu
             router
-            :default-active="this.$route.path"
+            :default-active="currentPath"
             style="height: 100vh"
             :style="{ backgroundColor: $background }">
             <el-menu-item index="/home">
@@ -24,6 +24,14 @@
 
 <script setup>
 import { $background } from "@/assets/theme.js";
+import { useRoute, useRouter } from "vue-router";
+import { ref } from "vue";
+const route = useRoute();
+const router = useRouter();
+const currentPath = ref("");
+
+// 在当前路径发生变化时更新 currentPath 的值
+currentPath.value = route.path;
 </script>
 
 <style scoped></style>
