@@ -1,7 +1,7 @@
 <script setup>
 import MusicCard from "@/components/MusicCard.vue";
 import { ref, onBeforeMount, onMounted } from "vue";
-import { $background, $p_carousel_item, $a_carousel_item } from "@/assets/theme.js";
+import { $background, $p_carousel_item, $a_carousel_item, $base_url } from "@/assets/theme.js";
 import axios from "axios";
 
 const ids = ref([]);
@@ -42,7 +42,8 @@ onBeforeMount(() => {
     for (const id of ids.value) {
         axios
             .get(
-                `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=b0d36553a3d96fb804b15692f31eaf63&mbid=${id}&format=json`
+                // `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=b0d36553a3d96fb804b15692f31eaf63&mbid=${id}&format=json`
+                `${$base_url}/request/track/${id}`
             )
             .then((response) => {
                 recommends.value.push(response.data.track);

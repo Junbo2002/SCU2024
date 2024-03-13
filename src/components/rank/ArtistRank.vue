@@ -40,12 +40,14 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import { $base_url } from "@/assets/theme";
 
 const tableData = ref([]);
 onMounted(() => {
     axios
         .get(
-            "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=b0d36553a3d96fb804b15692f31eaf63&format=json&limit=5"
+            // "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=b0d36553a3d96fb804b15692f31eaf63&format=json&limit=5"
+            `${$base_url}/request/topartists?limit=10`
         )
         .then((response) => {
             tableData.value = response.data.artists.artist;

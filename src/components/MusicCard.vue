@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
+import { $base_url } from "@/assets/theme";
 import axios from "axios";
 
 const props = defineProps({
@@ -27,7 +28,8 @@ onMounted(() => {
             loadedData.value = newValue;
             axios
                 .get(
-                    `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=b0d36553a3d96fb804b15692f31eaf63&mbid=${loadedData.value.mbid}&format=json`
+                    // `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=b0d36553a3d96fb804b15692f31eaf63&mbid=${loadedData.value.mbid}&format=json`
+                    `${$base_url}/request/track/${loadedData.value.mbid}`
                 )
                 .then((response) => {
                     // console.log(response.data.track.album.image[0]["#text"]);

@@ -11,6 +11,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import { $base_url } from "@/assets/theme";
 
 // const data = ref({ name: "" });
 
@@ -18,6 +19,7 @@ import { ref, onMounted } from "vue";
 //     axios
 //         .get(
 //             "http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=alex-devil&api_key=b0d36553a3d96fb804b15692f31eaf63&format=json"
+//             `${$bath_url}/request/user/alex-devil`
 //         )
 //         .then((response) => {
 //             data.value = response.data.user;

@@ -1,5 +1,6 @@
 <template>
-    <el-table :data="tableData" style="width: 100%; font-size: medium">
+    <!-- <h1>{{ tableDataNew }}</h1> -->
+    <el-table :data="tableDataNew" style="width: 100%; font-size: medium">
         <el-table-column width="80">
             <template #default="scope">
                 <div style="display: flex; align-items: center; justify-content: center">
@@ -11,20 +12,30 @@
             <template #default="scope">
                 <div style="display: flex; align-items: center">
                     <el-image
-                        style="width: 7vw; height: 7vw"
-                        :src="scope.row.image[3]['#text']"
+                        style="width: 8vw; height: 8vw"
+                        :src="scope.row.fm_image"
                         fit="fill" />
-                    <span class="track-name">{{ scope.row.name }}</span>
+                    <span class="track-name">{{ scope.row.fm_name }}</span>
                 </div>
             </template>
         </el-table-column>
-        <el-table-column prop="artist.name" label="Artist" width="150" />
+        <el-table-column prop="fm_artist" label="Artist" width="150" />
+        <el-table-column
+            prop="duration"
+            label="Duration"
+            :formatter="duration_formatter"
+            width="150" />
         <el-table-column prop="playcount" label="Playcount" width="150" />
-        <el-table-column prop="duration" label="Duration" :formatter="duration_formatter" />
+        <!-- 还可以放点tag -->
+        <el-table-column label="Tags" />
     </el-table>
 </template>
 
 <script setup>
+import axios from "axios";
+import { $base_url } from "@/assets/theme.js";
+import { ref, onBeforeMount } from "vue";
+
 const duration_formatter = (row, column, cellValue) => {
     const parsedMillisecond = parseInt(cellValue, 10);
     if (isNaN(parsedMillisecond)) {
@@ -38,17 +49,33 @@ const duration_formatter = (row, column, cellValue) => {
     return `${formattedMinutes}:${formattedSeconds}`;
 };
 
-import axios from "axios";
-import { ref, onMounted } from "vue";
-
 const tableData = ref([]);
-onMounted(() => {
+const tableDataNew = ref([]);
+
+onBeforeMount(() => {
     axios
-        .get(
-            "http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=b0d36553a3d96fb804b15692f31eaf63&format=json&limit=5"
-        )
+        .get($base_url + "/visualize/trackrank?count=20")
         .then((response) => {
-            tableData.value = response.data.tracks.track;
+            tableData.value = response.data;
+            for (let track of tableData.value) {
+                axios
+                    .get(
+                        // `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=b0d36553a3d96fb804b15692f31eaf63&mbid=${track.MBID}&format=json`
+                        `${$base_url}/request/track/${track.MBID}`
+                    )
+                    .then((res) => {
+                        if (res.data.error === undefined) {
+                            let tmp = track;
+                            tmp.fm_image = res.data.track.album.image[2]["#text"];
+                            tmp.fm_name = res.data.track.name;
+                            tmp.fm_artist = res.data.track.artist.name;
+                            tmp.fm_tags = res.data.track.toptags.tag;
+                            tableDataNew.value.push(tmp);
+                        } else {
+                            console.log("歌曲不存在");
+                        }
+                    });
+            }
         })
         .catch((error) => {
             console.error(error);
