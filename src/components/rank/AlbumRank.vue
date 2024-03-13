@@ -1,5 +1,5 @@
 <template>
-    <el-table :data="tableData" style="width: 100%; font-size: medium">
+    <!-- <el-table :data="tableData" style="width: 100%; font-size: medium">
         <el-table-column width="80">
             <template #default="scope">
                 <div style="display: flex; align-items: center; justify-content: center">
@@ -32,12 +32,30 @@
                 </el-tag>
             </template>
         </el-table-column>
-    </el-table>
+    </el-table> -->
 </template>
 
 <script setup>
-import albemInfo from "@/assets/getAlbumInfo.json";
-const tableData = [albemInfo];
+// import albemInfo from "@/assets/getAlbumInfo.json";
+// const tableData = [albemInfo];
+
+import axios from "axios";
+import { $base_url } from "@/assets/theme.js";
+import { ref, onMounted } from "vue";
+
+const tableData = ref([]);
+
+console.log($base_url + "/visualize/userrank?count=5");
+onMounted(() => {
+    axios
+        .get($base_url + "/visualize/userrank?count=5")
+        .then((response) => {
+            tableData.value = response.data;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+});
 </script>
 
 <style scoped>
