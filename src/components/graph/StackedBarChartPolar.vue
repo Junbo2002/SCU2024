@@ -22,6 +22,7 @@
             angleAxis: {},
             radiusAxis: {
                 type: 'category',
+                // 年龄区间
                 data: ['Mon', 'Tue', 'Wed', 'Thu'],
                 z: 10
             },
@@ -32,7 +33,7 @@
                 color: '#53abd8',
                 data: [1, 2, 3, 4],
                 coordinateSystem: 'polar',
-                name: 'A',
+                name: 'Base',
                 stack: 'a',
                 emphasis: {
                     focus: 'series'
@@ -43,7 +44,7 @@
                 color: '#a4cae5',
                 data: [2, 4, 6, 8],
                 coordinateSystem: 'polar',
-                name: 'B',
+                name: 'Premium',
                 stack: 'a',
                 emphasis: {
                     focus: 'series'
@@ -63,7 +64,7 @@
             ],
             legend: {
                 show: true,
-                data: ['A', 'B', 'C']
+                data: ['Base', 'Premium', 'C']
             }
             };
         // 设置实例参数
