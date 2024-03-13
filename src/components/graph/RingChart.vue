@@ -118,7 +118,7 @@
                 {
                 name: 'Access From',
                 type: 'pie',
-                radius: ['40%', '60%'],
+                radius: ['20%', '40%'],
                 center: ['50%', '55%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
@@ -142,10 +142,10 @@
                 },
                 data: [
                     { value: 1048, name: 'Search Engine' },
-                    { value: 735, name: 'Direct' },
-                    { value: 580, name: 'Email' },
-                    { value: 484, name: 'Union Ads' },
-                    { value: 300, name: 'Video Ads' }
+                    { value: 1735, name: 'Direct' },
+                    // { value: 580, name: 'Email' },
+                    // { value: 484, name: 'Union Ads' },
+                    // { value: 300, name: 'Video Ads' }
                 ]
                 }
             ]
@@ -176,7 +176,7 @@
                 {
                 name: 'Access From',
                 type: 'pie',
-                radius: ['40%', '60%'],
+                radius: ['50%', '70%'],
                 center: ['50%', '55%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
@@ -199,11 +199,11 @@
                     show: false
                 },
                 data: [
-                    { value: 1048, name: 'Search Engine' },
+                    { value: 148, name: 'Search Engine' },
                     { value: 735, name: 'Direct' },
-                    { value: 580, name: 'Email' },
-                    { value: 484, name: 'Union Ads' },
-                    { value: 300, name: 'Video Ads' }
+                    // { value: 580, name: 'Email' },
+                    // { value: 484, name: 'Union Ads' },
+                    // { value: 300, name: 'Video Ads' }
                 ]
                 }
             ]
@@ -234,7 +234,7 @@
                 {
                 name: 'Access From',
                 type: 'pie',
-                radius: ['40%', '60%'],
+                radius: ['30%', '50%'],
                 center: ['50%', '45%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
@@ -259,9 +259,9 @@
                 data: [
                     { value: 1048, name: 'Search Engine' },
                     { value: 735, name: 'Direct' },
-                    { value: 580, name: 'Email' },
-                    { value: 484, name: 'Union Ads' },
-                    { value: 300, name: 'Video Ads' }
+                    // { value: 580, name: 'Email' },
+                    // { value: 484, name: 'Union Ads' },
+                    // { value: 300, name: 'Video Ads' }
                 ]
                 }
             ]
