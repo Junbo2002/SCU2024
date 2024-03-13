@@ -160,4 +160,4 @@ def get_gender_users():
 
 if __name__ == '__main__':
     #  [18, 35, 50]
-    print(get_gender_users())
+    print(get_top_tracks())
