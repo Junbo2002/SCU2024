@@ -12,7 +12,7 @@ def get_model(model_name_lst):
 class FinalModel:
     def __init__(self):
         self.recall_model = get_model(["popular", "tag"])
-        self.pre_ranking_model = get_model(["user_cf", "item_cf"])
+        self.pre_ranking_model = get_model(["user_cf", "item_cf", "time_cf"])
 
         self.track_map = self.recall_model.track_map
 

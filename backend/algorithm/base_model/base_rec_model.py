@@ -47,4 +47,8 @@ class BaseRecModel:
             user_track_matrix = pickle.load(f)
         return user_track_matrix
 
-
+    def _get_track_time_vector(self):
+        data_path = self.base_path + "track_time_vector.pkl"
+        with open(data_path, 'rb') as f:
+            track_time_vector = pickle.load(f)
+        return track_time_vector
