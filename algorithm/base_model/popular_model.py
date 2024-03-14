@@ -36,6 +36,7 @@ class PopularModel(BaseRecModel):
         # {"111": 123, "222": 456, "333": 789}  id: playcount
         # 根据playcount的大小作为概率，随机选择top_n个
         size = min(top_n, len(self.track_ids))
+        # np.random.seed(0)
         index = np.random.choice(len(self.track_probs), size=size, replace=False, p=self.track_probs.ravel())
         return index
 

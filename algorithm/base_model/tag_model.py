@@ -30,7 +30,7 @@ class TagModel(BaseRecModel):
         # sims = sim[0, top_n_idx]
 
         # 提前存储相似度矩阵
-        # file = f"datasets/user_item_sim/{user_id}.npy"
+        # file = f"data_clean/user_item_sim/{user_id}.npy"
         # sim = np.load(file)
         sim = cosine_similarity(self.user_tags[0], self.item_tags, dense_output=True)
         sim = sim.squeeze(0)
