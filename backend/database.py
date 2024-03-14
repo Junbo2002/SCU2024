@@ -84,10 +84,19 @@ def get_avg_playcount_by_nationality():
         if abbr not in country_map: continue
         objs.append({
             "name": country_map[abbr],
-            "value": int(cnt)  # 数据分布更加集中
+            "value": avgnationplaycount_map(int(cnt))  # 数据分布更加集中
         })
     return objs
 
+
+# ========================
+# 映射函数
+# ========================
+def avgnationplaycount_map(x):
+    return -34285 + 2.426457764845094 * x - 5.511744175457289e-06 * x ** 2 + \
+        5.310121419737438e+05 * x ** -1 + 3.796465649065208e+04 * x ** -2
+
+# print(avgnationplaycount_map(10000))
 
 # ========================
 # 不同国籍用户数量
@@ -106,8 +115,11 @@ def get_cnt_by_nationality():
         objs.append({
             "name": country_map[abbr],
             "value": np.log(cnt)  # 数据分布更加集中
+
         })
     return objs
+
+
 
 
 # ========================
@@ -147,6 +159,43 @@ def get_age_info(ages: list = None):
 
 
 # ========================
+# 听众年龄、订阅类型、用户数量的关系
+# 返回格式：
+# {
+#     "base": [0, 1, 10, 16, ...],
+#     "premium":  [0, 1, 10, 16, ...]
+# }
+# ========================
+def get_age_info_all(ages: list = None):
+    if ages is None:
+        ages = [18, 35, 50]
+    assert len(ages) == 3
+
+    sql = f'SELECT age, COUNT(*) as user_count, subscribertype ' \
+          f'FROM user ' \
+          f'WHERE age != "" ' \
+          f'GROUP BY age, subscribertype;'
+
+    cursor_large.execute(sql)
+    res = cursor_large.fetchall()
+    max_age = max([int(i[0]) for i in res])
+
+    base_cnt = [0] * (max_age + 1)
+    premium_cnt = [0] * (max_age + 1)
+
+    for age, cnt, subscribertype in res:
+        if subscribertype == "base":
+            base_cnt[int(age)] = int(cnt)
+        else:
+            premium_cnt[int(age)] = int(cnt)
+
+    return {
+        "base": base_cnt,
+        "premium": premium_cnt
+    }
+
+
+# ========================
 # 用户播放次数区间
 # ========================
 def get_playcount_range():
@@ -177,5 +226,5 @@ def get_gender_users():
 
 if __name__ == '__main__':
     #  [18, 35, 50]
-    print(get_avg_playcount_by_nationality())
-    json.dump(get_avg_playcount_by_nationality(), open("assets/data/test.json", "w"), ensure_ascii=False, indent=4)
+    print(get_age_info_2())
+    # json.dump(get_avg_playcount_by_nationality(), open("assets/data/test.json", "w"), ensure_ascii=False, indent=4)

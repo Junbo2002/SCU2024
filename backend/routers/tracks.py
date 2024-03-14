@@ -34,6 +34,10 @@ async def get_top_artists(limit: int = 5):
 
 @lru_cache(maxsize=256)
 def _request(url: str):
+    # proxies = {
+    #     "http": "http://localhost:6666",
+    #     "https": "http://localhost:6666"
+    # }
     res = requests.get(url)
     # print(url)
     return res

@@ -31,7 +31,13 @@ async def get_nation_users():
 
 @router.get("/visualize/age", tags=["visualize"])
 async def get_ages(age1: int = 18, age2: int = 35, age3: int = 55):
-    res = get_age_info([age1, age2, age3])
+    res = get_age_info(sorted([age1, age2, age3]))
+    return res
+
+
+@router.get("/visualize/ageall", tags=["visualize"])
+async def get_ages():
+    res = get_age_info_all()
     return res
 
 
