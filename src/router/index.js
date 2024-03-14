@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/components/Home.vue";
-import Music from "@/components/Music.vue";
+import Music from "@/components/recommend/MusicMain.vue";
 import Data from "@/components/Data.vue";
 
 import TrackRank from "@/components/rank/TrackRank.vue";

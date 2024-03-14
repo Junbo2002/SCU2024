@@ -1,5 +1,4 @@
 <template>
-    <!-- <h1>{{ tableDataNew }}</h1> -->
     <el-table :data="tableDataNew" style="width: 100%; font-size: medium">
         <el-table-column width="80">
             <template #default="scope">
@@ -24,10 +23,23 @@
             prop="duration"
             label="Duration"
             :formatter="duration_formatter"
-            width="150" />
-        <el-table-column prop="playcount" label="Playcount" width="150" />
+            width="120" />
+        <el-table-column prop="playcount" label="Playcount" width="120" />
         <!-- 还可以放点tag -->
-        <el-table-column label="Tags" />
+        <el-table-column label="Tags">
+            <template #default="scope">
+                <el-tag
+                    v-for="tag in scope.row.fm_tags.slice(0, 3)"
+                    :key="tag"
+                    type="primary"
+                    round
+                    >{{ tag.name }}</el-tag
+                >
+                <!-- <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)"
+                    >Delete</el-button
+                > -->
+            </template>
+        </el-table-column>
     </el-table>
 </template>
 
@@ -54,14 +66,14 @@ const tableDataNew = ref([]);
 
 onBeforeMount(() => {
     axios
-        .get($base_url + "/visualize/trackrank?count=20")
+        .get($base_url + "/visualize/trackrank?count=20") // 获取音乐排行
         .then((response) => {
             tableData.value = response.data;
             for (let track of tableData.value) {
                 axios
                     .get(
                         // `http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=b0d36553a3d96fb804b15692f31eaf63&mbid=${track.MBID}&format=json`
-                        `${$base_url}/request/track/${track.MBID}`
+                        `${$base_url}/request/track/${track.MBID}` // 获取音乐信息
                     )
                     .then((res) => {
                         if (res.data.error === undefined) {

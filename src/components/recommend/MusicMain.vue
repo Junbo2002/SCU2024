@@ -1,15 +1,12 @@
 <script setup>
-import MUsicRec from "@/components/MusicRec.vue";
-import { ref, onBeforeMount, onMounted } from "vue";
-import { $base_url } from "@/assets/theme.js";
-import axios from "axios";
+import MUsicRec from "@/components/recommend/MusicRec.vue";
+import { ref } from "vue";
 
 const formInline = ref({
     userId: "",
 }); //
 
-const onSubmit = () => {
-    // console.log(formInline.value.userId);
+const onReset = () => {
     formInline.value.userId = "";
 };
 </script>
@@ -23,13 +20,14 @@ const onSubmit = () => {
                 placeholder="Select a user"
                 clearable
                 style="--el-select-width: 220px">
-                <el-option label="10020" value="10020" />
-                <el-option label="10021" value="10021" />
+                <el-option label="10010" value="10010" />
+                <el-option label="10032" value="10032" />
+                <el-option label="11097" value="11097" />
+                <el-option label="11140" value="11140" />
             </el-select>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" @click="onSubmit">Reset</el-button>
-            <!-- <el-button @click="resetForm">Reset</el-button> -->
+            <el-button type="primary" @click="onReset">Reset</el-button>
         </el-form-item>
     </el-form>
     <h1 v-if="!formInline.userId">请选择一个用户</h1>

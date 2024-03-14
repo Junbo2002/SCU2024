@@ -1,5 +1,5 @@
 <script setup>
-import MusicCard from "@/components/MusicCard.vue";
+import MusicCard from "@/components/recommend/MusicCard.vue";
 import { ref, onBeforeMount, onMounted } from "vue";
 import { $background, $p_carousel_item, $a_carousel_item, $base_url } from "@/assets/theme.js";
 import axios from "axios";
@@ -59,19 +59,6 @@ onBeforeMount(() => {
         .catch((error) => {
             console.error(error);
         });
-
-    // ids.value = [
-    //     "638f3fc4-9772-4ef6-ac88-ed4645a7492c",
-    //     "36c9d819-c497-4ac0-a53c-88586a450043",
-    //     "0c920ec7-e71e-45c7-a682-e94ead1c8512",
-    //     "f7a9accf-fac8-40d7-b84e-948d3bed32a6",
-    //     "a9a88d65-dafb-48fd-893e-abd36781d0e8",
-    //     "7f2f5d42-2e12-49cb-8659-4722df2eaa98",
-    //     "65ce5ddf-d781-460f-a553-84a7f39ab8eb",
-    //     "46a4d442-31f5-4118-8075-a869b5319b28",
-    //     "0adb9188-be23-4be2-bc6a-f55ab7664019",
-    //     "988329a8-42c4-40b5-9c4b-0ccc63797076",
-    // ];
 });
 
 onMounted(() => {

@@ -1,6 +1,4 @@
 <template>
-    <!-- <h1>{{ tableData }}</h1>
-    <h1>{{ typeof tableData[0] }}</h1> -->
     <el-table :data="tableData" style="width: 100%; font-size: medium">
         <el-table-column width="80">
             <template #default="scope">
@@ -9,31 +7,21 @@
                 </div>
             </template>
         </el-table-column>
-        <el-table-column label="Artist" width="350">
+        <el-table-column label="Artist" width="300">
             <template #default="scope">
                 <div style="display: flex; align-items: center">
-                    <el-image
-                        style="width: 7vw; height: 7vw"
-                        :src="scope.row.image[3]['#text']"
-                        fit="fill" />
+                    <el-image style="width: 7vw; height: 7vw" :src="scope.row.img" fit="fill" />
                     <span class="track-name">{{ scope.row.name }}</span>
                 </div>
             </template>
         </el-table-column>
         <el-table-column prop="listeners" label="Listeners" width="150" />
         <el-table-column prop="playcount" label="Playcount" width="150" />
-        <!-- <el-table-column label="Tag">
+        <el-table-column label="Url">
             <template #default="scope">
-                <el-tag
-                    style="margin-left: 3px; margin-bottom: 3px"
-                    v-for="tag in scope.row.artist.tags.tag.slice(0, 5)"
-                    :key="tag.name"
-                    round
-                    effect="plain">
-                    {{ tag.name }}
-                </el-tag>
+                <el-link type="primary" :href="scope.row.url">{{ scope.row.url }}</el-link>
             </template>
-        </el-table-column> -->
+        </el-table-column>
     </el-table>
 </template>
 

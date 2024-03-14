@@ -8,38 +8,36 @@
                 </div>
             </template>
         </el-table-column>
-        <!-- 用户名 -->
-        <!-- <el-table-column label="username" width="350">
-            <template #default="scope">
-                <div style="display: flex; align-items: center">
-                    <el-image
-                        style="width: 7vw; height: 7vw"
-                        :src="scope.row.album.image[3]['#text']"
-                        fit="fill" />
-                    <span class="track-name">{{ scope.row.last_username }}</span>
-                </div>
-            </template>
-        </el-table-column> -->
         <el-table-column prop="lastfm_username" label="Username" width="150" />
-        <el-table-column prop="gender" label="Gender" width="150" />
-        <el-table-column prop="age" label="Age" width="150" />
-        <el-table-column prop="country" label="Country" width="150" />
+        <el-table-column prop="gender" label="Gender" :formatter="formatter" width="150" />
+        <el-table-column prop="age" label="Age" :formatter="formatter" width="150" />
+        <el-table-column prop="country" label="Country" :formatter="formatter" width="150" />
         <el-table-column prop="playcount" label="Playcount" width="150" />
-        <el-table-column prop="subscribertype" label="Subscribertype" width="150" />
+        <el-table-column prop="subscribertype" label="Subscribertype">
+            <template #default="scope">
+                <el-tag v-if="scope.row.subscribertype === 'base'" type="success">{{
+                    scope.row.subscribertype
+                }}</el-tag>
+                <el-tag v-else type="warning">{{ scope.row.subscribertype }}</el-tag>
+            </template>
+        </el-table-column>
     </el-table>
 </template>
 
 <script setup>
-// import albemInfo from "@/assets/getAlbumInfo.json";
-// const tableData = [albemInfo];
-
 import axios from "axios";
 import { $base_url } from "@/assets/theme.js";
 import { ref, onMounted } from "vue";
 
 const tableData = ref([]);
 
-console.log($base_url + "/visualize/userrank?count=5");
+const formatter = (row, column, cellValue) => {
+    if (cellValue === "") {
+        return "-";
+    }
+    return cellValue;
+};
+
 onMounted(() => {
     axios
         .get($base_url + "/visualize/userrank?count=20")
