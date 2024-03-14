@@ -17,10 +17,7 @@ class TimeCFModel(BaseRecModel):
         过滤符合当前时间特征的歌曲
         """
         if filtered_tracks is None:
-            # raise ValueError("filtered_tracks can not be None for **TimeCFModel**")
-            track_time_vector = self.track_time_vector
-        else:
-            track_time_vector = self.track_time_vector[filtered_tracks]  # [1000, 36]
+            raise ValueError("filtered_tracks can not be None for **TimeCFModel**")
 
         # 获取当前时间特征：月份 & 小时
         now = datetime.now()
@@ -29,6 +26,7 @@ class TimeCFModel(BaseRecModel):
         time_vector[month - 1] = 1
         time_vector[hour + 12] = 1
 
+        track_time_vector = self.track_time_vector[filtered_tracks]  # [1000, 36]
         time_vector = np.array(time_vector).reshape(1, -1)
         time_sim = cosine_similarity(time_vector, track_time_vector)[0]
 
