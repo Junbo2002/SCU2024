@@ -25,8 +25,7 @@ app.mount("/static", StaticFiles(directory="assets"), name="static")
 
 # 解决跨域问题
 origins = [
-    "http://localhost",
-    "http://localhost:5173",
+    "*"
 ]
 
 app.add_middleware(
