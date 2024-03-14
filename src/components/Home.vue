@@ -1,5 +1,4 @@
 <template>
-    <GetId />
     <h1>我是排行榜</h1>
     <el-menu router default-active="this.$route.path" mode="horizontal">
         <el-menu-item index="/home/trackrank">热歌榜</el-menu-item>
@@ -14,7 +13,3 @@
     </el-menu>
     <RouterView></RouterView>
 </template>
-
-<script>
-    import GetId from "@/components/Login/GetId.vue";
-</script>

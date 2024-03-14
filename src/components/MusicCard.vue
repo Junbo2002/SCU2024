@@ -6,6 +6,7 @@ import axios from "axios";
 const props = defineProps({
     data: Object,
 });
+
 const loadedData = ref({
     name: "",
     mbid: "",

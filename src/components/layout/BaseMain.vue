@@ -1,8 +1,8 @@
 <template>
     <el-container>
         <el-header class="custom-header">
-            <!-- <div class="left-text">Hi!</div>
-            <div class="right-text">{{ data.name }}</div> -->
+            <div class="left-text">Hi!</div>
+            <div class="right-text">{{ data.name }}</div>
         </el-header>
         <el-main><slot></slot></el-main>
     </el-container>
@@ -11,23 +11,23 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
-import { $base_url } from "@/assets/theme";
+import { $base_url } from "@/assets/theme.js";
 
-// const data = ref({ name: "" });
+const data = ref({ name: "" });
 
-// onMounted(() => {
-//     axios
-//         .get(
-//             "http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=alex-devil&api_key=b0d36553a3d96fb804b15692f31eaf63&format=json"
-//             `${$bath_url}/request/user/alex-devil`
-//         )
-//         .then((response) => {
-//             data.value = response.data.user;
-//         })
-//         .catch((error) => {
-//             console.error(error);
-//         });
-// });
+onMounted(() => {
+    axios
+        .get(
+            `${$base_url}/request/user/alex-devil`
+            // "http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=alex-devil&api_key=b0d36553a3d96fb804b15692f31eaf63&format=json"
+        )
+        .then((response) => {
+            data.value = response.data.user;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+});
 </script>
 
 <style>
