@@ -73,9 +73,10 @@ onMounted(() => {
         indicator-position="outside"
         :interval="400000"
         type="card"
-        height="42vh"
+        height="25vw"
         @change="carouselChange"
         :style="{ backgroundColor: $background }"
+        style="margin-top: 6vw"
         ref="carousel">
         <el-carousel-item v-for="index in 5" :key="index" :id="index">
             <MusicCard :data="recommends[index - 1]" />

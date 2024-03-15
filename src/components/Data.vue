@@ -1,5 +1,7 @@
 <template>
     <div class="container" v-if="showCtrl">
+        <!-- 数据展示 -->
+        <div class="anchor" style="margin-top: 2vw"># Our work</div>
         <el-row>
             <el-col :span="8">
                 <el-statistic :value="volume">
@@ -20,14 +22,36 @@
                 </el-statistic>
             </el-col>
             <el-col :span="6">
-                <el-statistic :value="man_hour">
-                    <template #title> <div class="title">Man-hour</div> </template>
+                <el-statistic :value="rows">
+                    <template #title> <div class="title">Rows</div> </template>
                 </el-statistic>
             </el-col>
         </el-row>
-        <el-button type="primary" @click="onClick" round class="clickBtn"
-            >Click to show charts</el-button
-        >
+        <div style="text-align: center">
+            <el-button type="primary" @click="onClick" round class="clickBtn"
+                >Click here to show charts</el-button
+            >
+        </div>
+        <!-- 项目进度 -->
+        <div class="anchor" style="margin-top: 6vw"># Project progress</div>
+        <div class="processBox">
+            <div class="timelineProcessBox">
+                <el-timeline class="timeline">
+                    <el-timeline-item
+                        class="lineitem"
+                        :class="activity.done ? 'active' : 'inactive'"
+                        v-for="(activity, index) in activities"
+                        :key="index"
+                        :timestamp="activity.time">
+                        <span style="display: flex; flex-direction: column">
+                            <span style="margin: 10px 0; font-size: 16px">
+                                {{ activity.content }}
+                            </span>
+                        </span>
+                    </el-timeline-item>
+                </el-timeline>
+            </div>
+        </div>
     </div>
 
     <!-- 导航栏 -->
@@ -59,6 +83,36 @@ import StackedBarChartPolar from "@/components/graph/StackedBarChartPolar.vue";
 import RingChartOne from "@/components/graph/RingChartOne.vue";
 import LineChart from "@/components/graph/LineChart.vue";
 
+// 时间线
+
+const activities = [
+    {
+        content: "学习阶段",
+        time: "2024-02-26",
+        done: true,
+    },
+    {
+        content: "需求阶段",
+        done: true,
+        time: "2024-04-03",
+    },
+    {
+        content: "设计阶段",
+        done: true,
+        time: "2024-04-03",
+    },
+    {
+        content: "开发阶段",
+        done: true,
+        time: "2024-03-17",
+    },
+    {
+        content: "验收阶段",
+        done: true,
+        time: "2024-03-17",
+    },
+];
+
 // 控制界面展示
 const showCtrl = ref(true); // 默认展示数据卡片
 const onClick = () => {
@@ -69,7 +123,7 @@ const onClick = () => {
 const raw_volume = ref(0);
 const raw_tables = ref(0);
 const raw_sloc = ref(0);
-const raw_man_hour = ref(0);
+const raw_rows = ref(0);
 
 const volume = useTransition(raw_volume, {
     duration: 2600,
@@ -80,14 +134,14 @@ const tables = useTransition(raw_tables, {
 const sloc = useTransition(raw_sloc, {
     duration: 1900,
 });
-const man_hour = useTransition(raw_man_hour, {
+const rows = useTransition(raw_rows, {
     duration: 2300,
 });
 
 raw_volume.value = 9331036512;
-raw_tables.value = 18;
+raw_tables.value = 12;
 raw_sloc.value = 2345;
-raw_man_hour.value = 88888;
+raw_rows.value = 88888;
 
 // 控制标签切换
 const activeName = ref("first");
@@ -97,7 +151,12 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.anchor {
+    font-size: larger;
+    font-weight: bold;
+}
+
 .demo-tabs {
     width: 100%;
     padding-top: 0;
@@ -107,7 +166,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     height: 10vw;
     padding-top: 2vw;
-    margin-top: 5vw;
+    margin-top: 2vw;
 }
 .el-col {
     text-align: center;
@@ -121,9 +180,62 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     padding-bottom: 1vw;
 }
 .clickBtn {
-    float: right;
-    margin-right: 2vw;
     height: 3vw;
-    margin-top: 2vw;
+    margin-top: 3vw;
+    font-size: large;
+}
+
+.processBox {
+    height: 6vw;
+
+    .title {
+        font-size: 16px;
+        font-weight: 600;
+        padding-left: 32px;
+        padding-top: 16px;
+    }
+    .timelineProcessBox {
+        .timeline {
+            display: flex;
+            width: 95%;
+            margin: 40px auto;
+            .lineitem {
+                transform: translateX(50%);
+                width: 18%;
+            }
+        }
+    }
+}
+
+:deep(.el-timeline-item__tail) {
+    border-left: none;
+    border-top: 2px solid #e4e7ed;
+    width: 100%;
+    position: absolute;
+    top: 6px;
+}
+:deep(.el-timeline-item__wrapper) {
+    padding-left: 0;
+    position: absolute;
+    top: 20px;
+    transform: translateX(-50%);
+    text-align: center;
+}
+:deep(.el-timeline-item__timestamp) {
+    font-size: 14px;
+}
+.active {
+    :deep(.el-timeline-item__node) {
+        background-color: #409eff;
+    }
+    :deep(.el-timeline-item__tail) {
+        border-color: #409eff;
+    }
+}
+// 有active样式的下一个li
+.active + li {
+    :deep(.el-timeline-item__node) {
+        background-color: #409eff;
+    }
 }
 </style>
