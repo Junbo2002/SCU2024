@@ -19,6 +19,7 @@
 import { getCurrentInstance } from "vue";
 import axios from "axios";
 import { $base_url } from "@/assets/theme.js";
+import { List } from "echarts";
 
 export default {
     data() {
@@ -45,6 +46,7 @@ export default {
                     {
                         type: "bar",
                         color: "#53abd8",
+                        // color: "#4a7298",
                         // data: [1, 2, 3, 4],
                         coordinateSystem: "polar",
                         name: "Base",
@@ -55,7 +57,8 @@ export default {
                     },
                     {
                         type: "bar",
-                        color: "#a4cae5",
+                        // color: "#a4cae5",
+                        color: "#f3c846",
                         // data: [2, 4, 6, 8],
                         coordinateSystem: "polar",
                         name: "Premium",
@@ -94,41 +97,31 @@ export default {
                 Math.round(this.points[2]),
             ];
             var value = p.sort((a, b) => a - b);
-            var value1 = value[0] + 1;
-            var value2 = value[1] + 1;
-            var value3 = value[2] + 1;
-            var amount1 = 0;
-            var amount2 = 0;
-            var amount3 = 0;
-            var amount4 = 0;
-            var amount5 = 0;
-            var amount6 = 0;
-            var amount7 = 0;
-            var amount8 = 0;
-            for (let i = value3; i < 115; i++) {
-                amount1 = amount1 + this.tableData.base[i];
+            // 使用前缀和算法
+            var getPreSum = function(nums){
+                // 从开始到第i个元素之和 
+                const preSum = [];
+                for(let i = 0; i < nums.length; i++){
+                    if(i === 0){
+                        preSum[i] = nums[i];
+                    } else{
+                        preSum[i] = preSum[i-1] + nums[i]
+                    }
+                }
+                preSum[-1] = 0; 
+                return preSum;
             }
-            for (let i = value2; i < value3; i++) {
-                amount2 = amount2 + this.tableData.base[i];
-            }
-            for (let i = value1; i < value2; i++) {
-                amount3 = amount3 + this.tableData.base[i];
-            }
-            for (let i = 0; i < value1; i++) {
-                amount4 = amount4 + this.tableData.base[i];
-            }
-            for (let i = value3; i < 115; i++) {
-                amount5 = amount5 + this.tableData.premium[i];
-            }
-            for (let i = value2; i < value3; i++) {
-                amount6 = amount6 + this.tableData.premium[i];
-            }
-            for (let i = value1; i < value2; i++) {
-                amount7 = amount7 + this.tableData.premium[i];
-            }
-            for (let i = 0; i < value1; i++) {
-                amount8 = amount8 + this.tableData.premium[i];
-            }
+            var sum1 = getPreSum(this.tableData.base);
+            var sum2 = getPreSum(this.tableData.premium);
+
+            var amount1 = sum1[114] - sum1[value[2]];
+            var amount2 = sum1[value[2]] - sum1[value[1]];
+            var amount3 = sum1[value[1]] - sum1[value[0]];
+            var amount4 = sum1[value[0]];
+            var amount5 = sum2[114] - sum2[value[2]];
+            var amount6 = sum2[value[2]] - sum2[value[1]];
+            var amount7 = sum2[value[1]] - sum2[value[0]];
+            var amount8 = sum2[value[0]];
             this.option["radiusAxis"]["data"] = [
                 value[2] + "+",
                 value[1] + "-" + value[2],
