@@ -1,6 +1,5 @@
 <script setup>
 import MUsicRec from "@/components/recommend/MusicRec.vue";
-import { useId } from "element-plus";
 import { ref } from "vue";
 import { useStore } from "vuex";
 
@@ -12,18 +11,17 @@ const onReset = () => {
     formInline.value.userId = "";
 };
 
-const store = useStore()
+const store = useStore();
 const handleChange = () => {
-    store.commit('increment', formInline.value.userId)
-    console.log(formInline.value.userId)
-    console.log(store.state.id)
-}
-
+    store.commit("increment", formInline.value.userId);
+    console.log(formInline.value.userId);
+    console.log(store.state.id);
+};
 </script>
 
 <template>
     <!-- 用户登录 -->
-    <el-form :inline="true" :model="formInline">
+    <el-form :inline="true" :model="formInline" style="margin-top: 1vw">
         <el-form-item label="User ID">
             <el-select
                 @change="handleChange"
