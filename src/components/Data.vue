@@ -26,7 +26,7 @@
             </el-col>
         </el-row>
         <el-button type="primary" @click="onClick" round class="clickBtn"
-            >点击展示数据可视化图表</el-button
+            >Click to show charts</el-button
         >
     </div>
 

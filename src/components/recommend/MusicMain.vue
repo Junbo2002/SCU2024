@@ -41,6 +41,6 @@ const handleChange = () => {
             <el-button type="primary" @click="onReset" round>Reset</el-button>
         </el-form-item>
     </el-form>
-    <h1 v-if="!formInline.userId">请选择一个用户</h1>
+    <h1 v-if="!formInline.userId">Please select a user</h1>
     <MUsicRec v-else :userId="formInline.userId" />
 </template>
