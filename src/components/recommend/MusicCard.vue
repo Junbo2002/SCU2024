@@ -33,7 +33,6 @@ onMounted(() => {
                     `${$base_url}/request/track/${loadedData.value.mbid}`
                 )
                 .then((response) => {
-                    // console.log(response.data.track.album.image[0]["#text"]);
                     loadedData.value.image = response.data.track.album.image[3]["#text"];
                 })
                 .catch((error) => {

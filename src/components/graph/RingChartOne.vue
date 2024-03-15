@@ -31,7 +31,6 @@ onMounted(() => {
             tableDataNew.value.push(obj1);
             tableDataNew.value.push(obj2);
             tableDataNew.value.push(obj3);
-            console.log(tableDataNew.value);
         })
         .catch((error) => {
             console.error(error);

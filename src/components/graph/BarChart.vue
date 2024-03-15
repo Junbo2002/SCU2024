@@ -21,8 +21,6 @@ onMounted(() => {
                 tableDataNew1.value.push(key);
                 tableDataNew2.value.push(tableData.value[key]);
             }
-            console.log(tableDataNew1.value);
-            console.log(tableDataNew2.value);
         })
         .catch((error) => {
             console.error(error);

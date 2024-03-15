@@ -36,7 +36,6 @@ onBeforeMount(() => {
         .get(`${$base_url}/rec?userid=${props.userId}&count=10`)
         .then((res) => {
             ids.value = res.data.rec;
-            console.log(res.data.rec);
             for (const id of ids.value) {
                 axios
                     .get(
@@ -48,7 +47,7 @@ onBeforeMount(() => {
                         if (response.data.error === undefined) {
                             recommends.value.push(response.data.track);
                         } else {
-                            console.log(response.data);
+                            console.log("歌曲不存在");
                         }
                     })
                     .catch((error) => {

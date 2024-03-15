@@ -53,7 +53,6 @@ import type { TabsPaneContext } from "element-plus";
 
 import WorldMap from "@/components/graph/WorldMap.vue";
 import BarChart from "@/components/graph/BarChart.vue";
-import SlideSelect from "@/components/graph/SlideSelect.vue";
 import StackedBarChartPolar from "@/components/graph/StackedBarChartPolar.vue";
 import RingChartOne from "@/components/graph/RingChartOne.vue";
 import LineChart from "@/components/graph/LineChart.vue";

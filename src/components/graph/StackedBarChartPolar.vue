@@ -125,7 +125,6 @@ export default {
             for (let i = 0; i < value1; i++) {
                 amount8 = amount8 + this.tableData.premium[i];
             }
-            console.log(value);
             this.option["radiusAxis"]["data"] = [
                 value[2] + "+",
                 value[1] + "-" + value[2],
@@ -147,7 +146,6 @@ export default {
             .get($base_url + "/visualize/ageall")
             .then((response) => {
                 this.tableData = response.data;
-                console.log(this.tableData);
             })
             .catch((error) => {
                 console.error(error);
