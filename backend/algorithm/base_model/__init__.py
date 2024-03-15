@@ -4,7 +4,6 @@ from .user_cf import UserCFModel
 from .item_cf import ItemCFModel
 from .tag_model import TagModel
 from .time_cf import TimeCFModel
-from .rearange_model import RearrangeModel
 
 base_path = "algorithm/datasets/data/"
 
@@ -17,7 +16,6 @@ class BaseModelFactory:
             "item_cf": ItemCFModel,
             "time_cf": TimeCFModel,
             "tag": TagModel,
-            "rearrange": RearrangeModel,
             "multi_road_recall": MultiRoadRecallModel
         }
 

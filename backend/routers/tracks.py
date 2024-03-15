@@ -2,10 +2,12 @@ from fastapi import APIRouter
 from fastapi_cache import caches
 import requests
 from functools import lru_cache
+from bs4 import BeautifulSoup
+import json
 
 router = APIRouter()
 API_KEY = "b0d36553a3d96fb804b15692f31eaf63"
-
+artist_url_img_map = json.load(open("assets/data/artist_url_map.json", "r"))
 
 # @lru_cache(maxsize=128)
 
@@ -24,23 +26,41 @@ async def get_user_by_name(username: str):
     res = _request(url)
     return res.json()
 
+
 # top歌手列表
 @router.get("/request/topartists", tags=["tracks"])
 async def get_top_artists(limit: int = 5):
     url = f"https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key={API_KEY}&format=json&limit={limit}"
-    res = _request(url)
-    return res.json()
+    res = _request(url).json()
+
+    # 获取歌手图片
+    artist_lst = res['artists']['artist']
+    for artist in artist_lst:
+        url = artist['url']
+        if artist['url'] in artist_url_img_map:
+            artist['img'] = artist_url_img_map[url]
+        else:
+            artist['img'] = _get_artist_img(url)
+            artist_url_img_map[url] = artist['img']
+    return res
 
 
 @lru_cache(maxsize=256)
 def _request(url: str):
-    # proxies = {
-    #     "http": "http://localhost:6666",
-    #     "https": "http://localhost:6666"
-    # }
-    res = requests.get(url)
+    proxies = {
+        "http": "http://localhost:6666",
+        "https": "http://localhost:6666"
+    }
+    res = requests.get(url, proxies=proxies)
     # print(url)
     return res
+
+
+@lru_cache(maxsize=32)
+def _get_artist_img(url):
+    return BeautifulSoup(requests.get(url).text, 'html.parser') \
+        .find("div", class_="header-new-background-image").get('content')
+
 
 # if __name__ == '__main__':
 #     @lru_cache(maxsize=128)

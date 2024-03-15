@@ -84,7 +84,7 @@ def get_avg_playcount_by_nationality():
         if abbr not in country_map: continue
         objs.append({
             "name": country_map[abbr],
-            "value": avgnationplaycount_map(int(cnt))  # 数据分布更加集中
+            "value": int(avgnationplaycount_map(int(cnt)) / 4) # 数据分布更加集中
         })
     return objs
 
@@ -114,7 +114,7 @@ def get_cnt_by_nationality():
         if abbr not in country_map: continue
         objs.append({
             "name": country_map[abbr],
-            "value": np.log(cnt)  # 数据分布更加集中
+            "value": int(np.log(cnt) * 10000)  # 数据分布更加集中
 
         })
     return objs
@@ -166,11 +166,7 @@ def get_age_info(ages: list = None):
 #     "premium":  [0, 1, 10, 16, ...]
 # }
 # ========================
-def get_age_info_all(ages: list = None):
-    if ages is None:
-        ages = [18, 35, 50]
-    assert len(ages) == 3
-
+def get_age_info_all():
     sql = f'SELECT age, COUNT(*) as user_count, subscribertype ' \
           f'FROM user ' \
           f'WHERE age != "" ' \
@@ -188,6 +184,10 @@ def get_age_info_all(ages: list = None):
             base_cnt[int(age)] = int(cnt)
         else:
             premium_cnt[int(age)] = int(cnt)
+
+    # 前缀和
+    # base_cnt = np.cumsum(base_cnt).tolist()
+    # premium_cnt = np.cumsum(premium_cnt).tolist()
 
     return {
         "base": base_cnt,
@@ -224,7 +224,19 @@ def get_gender_users():
     return objs
 
 
+# ========================
+# 根据用户id获得用户名
+# ========================
+def get_username_by_id(uid):
+    sql = f'SELECT lastfm_username FROM `user` WHERE id = "{uid}"'
+
+    cursor_large.execute(sql)
+    res = cursor_large.fetchall()
+
+    return res[0][0] if res else None
+
+
+
 if __name__ == '__main__':
     #  [18, 35, 50]
-    print(get_age_info_2())
-    # json.dump(get_avg_playcount_by_nationality(), open("assets/data/test.json", "w"), ensure_ascii=False, indent=4)
+    pass

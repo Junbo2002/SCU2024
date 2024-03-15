@@ -51,3 +51,9 @@ async def get_play_count_range():
 async def get_gender():
     res = get_gender_users()
     return res
+
+# 根据用户名获取用户信息  /users/username
+@router.get("/request/user", tags=["tracks"])
+async def get_user_by_name(uid: str):
+    res = get_username_by_id(uid)
+    return res
