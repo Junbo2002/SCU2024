@@ -45,12 +45,6 @@ onMounted(() => {
     const dom1 = document.getElementById("myRingChart");
     const myRingChart = echarts.init(dom1);
 
-    // var myChart = echarts.init(dom, null, {
-    //     renderer: "canvas",
-    //     useDirtyRect: false,
-    // });
-    // var option;
-
     const option = {
         tooltip: {
             trigger: "item",
@@ -63,7 +57,8 @@ onMounted(() => {
             {
                 name: "Amount",
                 type: "pie",
-                radius: ["40%", "70%"],
+                center: ["50%", "56%"],
+                radius: ["45%", "70%"],
                 avoidLabelOverlap: false,
                 padAngle: 5,
                 itemStyle: {
@@ -84,18 +79,8 @@ onMounted(() => {
                 labelLine: {
                     show: false,
                 },
-                // data: [
-                //     { value: 13490, name: 'Direct' },
-                //     { value: 26377, name: 'Email' },
-                //     { value: 5300, name: 'Search Engine' },
-                // ]
             },
         ],
     };
-    // myChart.setOption(option);
-
-    // if (option && typeof option === "object") {
-    //     myChart.setOption(option);
-    // }
 });
 </script>

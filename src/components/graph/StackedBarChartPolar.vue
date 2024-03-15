@@ -171,7 +171,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 10vh;
+    height: 6vh;
     /* background-color: pink; */
 }
 

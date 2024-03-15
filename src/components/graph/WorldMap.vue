@@ -1,5 +1,5 @@
 <template>
-    <div id="container" style="height: 100vh; width: 80vw"></div>
+    <div id="container" style="height: 76vh; width: 80vw"></div>
 </template>
 
 <script setup>
@@ -40,9 +40,7 @@ onMounted(() => {
     echarts.registerMap("World", World);
     option = {
         title: {
-            text: "World Music Type",
-            // subtext: "Data from www.census.gov",
-            // sublink: "http://www.census.gov/popest/data/datasets.html",
+            text: "World Music Listeners",
             left: "left",
         },
         tooltip: {
@@ -52,17 +50,12 @@ onMounted(() => {
         },
         visualMap: {
             left: "right",
+            top: "60%",
             min: 8.0,
             max: 12.806174828821609,
             // 浅色在上面
             inRange: {
                 color: [
-                    // '#ecf5ff',
-                    // '#d9ecff',
-                    // '#c6e2ff',
-                    // '#a0cfff',
-                    // '#79bbff',
-                    // '#337ecc'
                     "#313695cc",
                     "#4575b4cc",
                     "#74add1cc",
@@ -79,7 +72,6 @@ onMounted(() => {
         },
         toolbox: {
             show: true,
-            //orient: 'vertical',
             left: "right",
             top: "top",
             feature: {
@@ -92,13 +84,9 @@ onMounted(() => {
                 },
             },
         },
-        legend: {
-            //     data: ["China"],
-            //     show: true
-        },
         series: [
             {
-                // name: "USA PopEstimates",
+                name: "Amount",
                 type: "map",
                 roam: false,
                 map: "World",
@@ -107,33 +95,9 @@ onMounted(() => {
                         show: true,
                     },
                 },
-                // data: tableData.value
-                // [
-                //     { name: "China", value: 1200 },
-                //     { name: "Russia", value: 20 },
-                //     { name: "United States", value: 250 },
-                //     { name: "Japan", value: 400 },
-                //     { name: "Brazil", value: 1500 },
-                // ],
-                // data: [
-                //     {
-                //         "name": "Timor-Leste",
-                //         "value": 364461
-                //     },
-                //     {
-                //         "name": "Liechtenstein",
-                //         "value": 281817
-                //     }
-                // ]
             },
         ],
     };
-    // myChart.setOption(option);
-
-    // if (option && typeof option === "object") {
-    //     myChart.setOption(option);
-    // }
-
     window.addEventListener("resize", myChart.resize);
 });
 </script>

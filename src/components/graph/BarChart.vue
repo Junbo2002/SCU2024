@@ -1,5 +1,5 @@
 <template>
-    <div id="barChart" style="height: 80vh; width: 80vw"></div>
+    <div id="barChart" style="height: 75vh; width: 80vw"></div>
 </template>
 
 <script setup>
@@ -54,6 +54,7 @@ onMounted(() => {
             type: "value",
         },
         grid: {
+            top: "10%",
             bottom: "20%",
         },
         series: [
