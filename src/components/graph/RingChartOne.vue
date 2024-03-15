@@ -46,6 +46,10 @@ onMounted(() => {
     const myRingChart = echarts.init(dom1);
 
     const option = {
+        title: {
+            text: "Listener vs. Gender",
+            left: "left",
+        },
         tooltip: {
             trigger: "item",
         },

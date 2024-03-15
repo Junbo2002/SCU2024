@@ -1,5 +1,5 @@
 <template>
-    <div id="container" style="height: 76vh; width: 80vw"></div>
+    <div id="container1" style="height: 76vh; width: 80vw"></div>
 </template>
 
 <script setup>
@@ -13,7 +13,7 @@ const tableData = ref();
 
 onMounted(() => {
     axios
-        .get($base_url + "/visualize/nationusers")
+        .get($base_url + "/visualize/avgnationplaycount")
         .then((response) => {
             tableData.value = response.data;
         })
@@ -29,7 +29,7 @@ onMounted(() => {
             }
         });
 
-    const dom = document.getElementById("container");
+    const dom = document.getElementById("container1");
 
     var myChart = echarts.init(dom, null, {
         renderer: "canvas",
@@ -40,7 +40,7 @@ onMounted(() => {
     echarts.registerMap("World", World);
     option = {
         title: {
-            text: "World Music Listeners",
+            text: "World Music Plays",
             left: "left",
         },
         tooltip: {

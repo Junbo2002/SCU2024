@@ -29,6 +29,10 @@ export default {
             isDragging: false,
             activePointIndex: -1,
             option: {
+                title: {
+                    text: "Listener vs. Age vs. Subscription Type",
+                    left: "left",
+                },
                 angleAxis: {},
                 radiusAxis: {
                     type: "category",

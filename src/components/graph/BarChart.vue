@@ -43,6 +43,10 @@ onMounted(() => {
     // var option;
 
     const option = {
+        title: {
+            text: "Listener vs. Plays",
+            left: "left",
+        },
         xAxis: {
             type: "category",
             // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -54,7 +58,7 @@ onMounted(() => {
             type: "value",
         },
         grid: {
-            top: "10%",
+            top: "13%",
             bottom: "20%",
         },
         series: [

@@ -38,10 +38,11 @@
     <LineChart /> -->
 
     <el-tabs v-else v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-        <el-tab-pane label="Map" name="first"><WorldMap /></el-tab-pane>
-        <el-tab-pane label="Gender" name="second"><StackedBarChartPolar /></el-tab-pane>
-        <el-tab-pane label="Age" name="third"><RingChartOne /></el-tab-pane>
-        <el-tab-pane label="Time" name="fourth"><BarChart /></el-tab-pane>
+        <el-tab-pane label="Listener Map" name="first"><WorldMap /></el-tab-pane>
+        <el-tab-pane label="Play Map" name="second"><WorldMapPlay /></el-tab-pane>
+        <el-tab-pane label="Age" name="third"><StackedBarChartPolar /></el-tab-pane>
+        <el-tab-pane label="Play" name="fourth"><BarChart /></el-tab-pane>
+        <el-tab-pane label="Gender" name="fifth"><RingChartOne /></el-tab-pane>
     </el-tabs>
 </template>
 
@@ -52,6 +53,7 @@ import { ChatLineRound, Male } from "@element-plus/icons-vue";
 import type { TabsPaneContext } from "element-plus";
 
 import WorldMap from "@/components/graph/WorldMap.vue";
+import WorldMapPlay from "@/components/graph/WorldMapPlay.vue";
 import BarChart from "@/components/graph/BarChart.vue";
 import StackedBarChartPolar from "@/components/graph/StackedBarChartPolar.vue";
 import RingChartOne from "@/components/graph/RingChartOne.vue";
