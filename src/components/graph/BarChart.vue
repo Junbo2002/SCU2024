@@ -72,6 +72,10 @@ onMounted(() => {
                         { offset: 1, color: "#188df0" },
                     ]),
                 },
+                label: {
+                    show: true,
+                    position: 'top',
+                },
                 emphasis: {
                     itemStyle: {
                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [

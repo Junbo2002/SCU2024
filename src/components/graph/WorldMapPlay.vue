@@ -92,7 +92,7 @@ onMounted(() => {
                 map: "World",
                 emphasis: {
                     label: {
-                        show: true,
+                        show: false,
                     },
                 },
             },
