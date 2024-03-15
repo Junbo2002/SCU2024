@@ -27,7 +27,7 @@ const onReset = () => {
             </el-select>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" @click="onReset">Reset</el-button>
+            <el-button type="primary" @click="onReset" round>Reset</el-button>
         </el-form-item>
     </el-form>
     <h1 v-if="!formInline.userId">请选择一个用户</h1>
