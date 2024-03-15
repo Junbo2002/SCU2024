@@ -31,14 +31,18 @@
     </div>
 
     <!-- 导航栏 -->
+    <!-- <WorldMap />
+    <StackedBarChartPolar />
+    <RingChartOne />
+    <BarChart />
+    <LineChart /> -->
+
     <el-tabs v-else v-model="activeName" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="Map" name="first"><WorldMap /></el-tab-pane>
         <el-tab-pane label="Gender" name="second"><StackedBarChartPolar /></el-tab-pane>
-        <el-tab-pane label="Age" name="third"><RingChart /></el-tab-pane>
+        <el-tab-pane label="Age" name="third"><RingChartOne /></el-tab-pane>
         <el-tab-pane label="Time" name="fourth"><BarChart /></el-tab-pane>
     </el-tabs>
-
-    <div style="height: 60vh"></div>
 </template>
 
 <script lang="ts" setup>
@@ -51,7 +55,7 @@ import WorldMap from "@/components/graph/WorldMap.vue";
 import BarChart from "@/components/graph/BarChart.vue";
 import SlideSelect from "@/components/graph/SlideSelect.vue";
 import StackedBarChartPolar from "@/components/graph/StackedBarChartPolar.vue";
-import RingChart from "@/components/graph/RingChart.vue";
+import RingChartOne from "@/components/graph/RingChartOne.vue";
 import LineChart from "@/components/graph/LineChart.vue";
 
 // 控制界面展示
@@ -93,6 +97,11 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 </script>
 
 <style scoped>
+.demo-tabs {
+    width: 100%;
+    padding-top: 0;
+}
+
 .el-row {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     height: 10vw;

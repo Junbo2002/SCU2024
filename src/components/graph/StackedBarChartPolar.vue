@@ -1,5 +1,5 @@
 <template>
-    <div ref="StackedBarChartPolar" id="stackBarChartPolar" :style="{ height: '70vh' }"></div>
+    <div ref="StackedBarChartPolar" id="stackBarChartPolar" style="height: 70vh; width: 80vw"></div>
     <div class="slider-demo-container">
         <div class="slider-demo-block" ref="slider">
             <div class="slider-track"></div>
@@ -16,9 +16,8 @@
 </template>
 
 <script>
-import { getCurrentInstance, onMounted } from "vue";
+import { getCurrentInstance } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { $base_url } from "@/assets/theme.js";
 
 export default {
@@ -91,15 +90,6 @@ export default {
                 Math.round(this.points[2]),
             ];
             var value = p.sort((a, b) => a - b);
-            // {
-            //     if (a > b) {
-            //         return 1;
-            //     } else if (a < b) {
-            //         return -1;
-            //     } else {
-            //         return 0;
-            //     }
-            // }
             var value1 = value[0] + 1;
             var value2 = value[1] + 1;
             var value3 = value[2] + 1;

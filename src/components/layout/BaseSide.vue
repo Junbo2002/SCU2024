@@ -1,10 +1,10 @@
 <template>
-    <el-aside width="16vw">
+    <el-aside width="15vw">
         <h1 style="margin-left: 1vw">音乐推荐系统</h1>
         <el-menu
             router
             :default-active="currentPath"
-            style="height: 100vh"
+            style="height: 90vh"
             :style="{ backgroundColor: $background }">
             <el-menu-item index="/home">
                 <el-icon><TrophyBase /></el-icon>

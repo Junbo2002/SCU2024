@@ -34,9 +34,7 @@ onMounted(() => {
 .custom-header {
     display: flex;
     align-items: center;
-    /* background-color: #e9e9eb; */
     background-image: linear-gradient(-90deg, white, #e9e9eb, #e9e9eb, #e9e9eb, white);
-    height: 7vh;
     gap: 10px;
 }
 

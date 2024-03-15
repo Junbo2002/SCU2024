@@ -1,5 +1,5 @@
 <template>
-    <div id="container" style="height: 100vh"></div>
+    <div id="container" style="height: 100vh; width: 80vw"></div>
 </template>
 
 <script setup>
@@ -16,16 +16,15 @@ onMounted(() => {
         .get($base_url + "/visualize/avgnationplaycount")
         .then((response) => {
             tableData.value = response.data;
-            
         })
         .catch((error) => {
             console.error(error);
         })
         .finally(() => {
             if (option && typeof option === "object") {
-                option["series"][0]["data"] = tableData.value
-                option["visualMap"]["max"] = tableData.value[0]["value"]
-                option["visualMap"]["min"] = tableData.value[tableData.value.length-1]["value"]
+                option["series"][0]["data"] = tableData.value;
+                option["visualMap"]["max"] = tableData.value[0]["value"];
+                option["visualMap"]["min"] = tableData.value[tableData.value.length - 1]["value"];
                 myChart.setOption(option);
             }
         });
@@ -38,23 +37,7 @@ onMounted(() => {
     });
     var option;
 
-    echarts.registerMap("World", World, {
-        // Alaska: {
-        //     left: -131,
-        //     top: 25,
-        //     width: 15,
-        // },
-        // Hawaii: {
-        //     left: -110,
-        //     top: 28,
-        //     width: 5,
-        // },
-        // "Puerto Rico": {
-        //     left: -76,
-        //     top: 26,
-        //     width: 2,
-        // },
-    });
+    echarts.registerMap("World", World);
     option = {
         title: {
             text: "World Music Type",
@@ -68,30 +51,30 @@ onMounted(() => {
             transitionDuration: 0.2,
         },
         visualMap: {
-            left: 'right',
+            left: "right",
             min: 8.0,
             max: 12.806174828821609,
             // 浅色在上面
             inRange: {
                 color: [
-                // '#ecf5ff',
-                // '#d9ecff',
-                // '#c6e2ff',
-                // '#a0cfff',
-                // '#79bbff',
-                // '#337ecc'
-                '#313695cc',
-                '#4575b4cc',
-                '#74add1cc',
-                '#abd9e9cc',
-                '#e0f3f8cc',
-                '#ffffbfcc',
-                '#fee090cc',
-                '#fdae61cc',
-                '#f46d43cc',
-                '#d73027cc',
-                '#a50026cc',
-                ]
+                    // '#ecf5ff',
+                    // '#d9ecff',
+                    // '#c6e2ff',
+                    // '#a0cfff',
+                    // '#79bbff',
+                    // '#337ecc'
+                    "#313695cc",
+                    "#4575b4cc",
+                    "#74add1cc",
+                    "#abd9e9cc",
+                    "#e0f3f8cc",
+                    "#ffffbfcc",
+                    "#fee090cc",
+                    "#fdae61cc",
+                    "#f46d43cc",
+                    "#d73027cc",
+                    "#a50026cc",
+                ],
             },
         },
         toolbox: {
@@ -102,7 +85,7 @@ onMounted(() => {
             feature: {
                 dataView: { show: false },
                 restore: {
-                    show: true,
+                    show: false,
                 },
                 saveAsImage: {
                     show: false,
