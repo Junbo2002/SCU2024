@@ -224,6 +224,19 @@ def get_gender_users():
     return objs
 
 
+# ========================
+# 根据用户id获得用户名
+# ========================
+def get_username_by_id(uid):
+    sql = f'SELECT lastfm_username FROM `user` WHERE id = "{uid}"'
+
+    cursor_large.execute(sql)
+    res = cursor_large.fetchall()
+
+    return res[0][0] if res else None
+
+
+
 if __name__ == '__main__':
     #  [18, 35, 50]
     print(get_age_info_2())

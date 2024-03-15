@@ -42,4 +42,4 @@ async def root():
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host="172.16.0.49", port=8000)
+    uvicorn.run(app, host="172.16.0.15", port=8000)

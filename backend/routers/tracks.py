@@ -26,6 +26,7 @@ async def get_user_by_name(username: str):
     res = _request(url)
     return res.json()
 
+
 # top歌手列表
 @router.get("/request/topartists", tags=["tracks"])
 async def get_top_artists(limit: int = 5):
@@ -46,11 +47,11 @@ async def get_top_artists(limit: int = 5):
 
 @lru_cache(maxsize=256)
 def _request(url: str):
-    # proxies = {
-    #     "http": "http://localhost:6666",
-    #     "https": "http://localhost:6666"
-    # }
-    res = requests.get(url)
+    proxies = {
+        "http": "http://localhost:6666",
+        "https": "http://localhost:6666"
+    }
+    res = requests.get(url, proxies=proxies)
     # print(url)
     return res
 
