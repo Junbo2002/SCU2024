@@ -2,7 +2,7 @@
     <el-container>
         <el-header class="custom-header">
             <div class="left-text">Hi!</div>
-            <div class="right-text">{{ data.name }}</div>
+            <div class="right-text">{{ data }}</div>
         </el-header>
         <el-main><slot></slot></el-main>
     </el-container>
@@ -10,24 +10,49 @@
 
 <script setup>
 import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { $base_url } from "@/assets/theme.js";
+import { useStore } from "vuex";
 
-const data = ref({ name: "" });
+// const data = ref({ name: "" });
+const data = ref();
+
+const store = useStore()
+
+// onMounted(() => {
+//     axios
+//         .get($base_url + "/request/user?uid=" + store.state.id)
+//         .then((response) => {
+//             console.log($base_url + "/request/user?uid=" + store.state.id)
+//             console.log(response.data)
+//             data.value = response.data;
+//         })
+//         .catch((error) => {
+//             console.error(error);
+//         });
+// });
 
 onMounted(() => {
+    fetchData();
+});
+
+watch(() => store.state.id, () => {
+    fetchData();
+});
+
+const fetchData = () => {
     axios
-        .get(
-            `${$base_url}/request/user/alex-devil`
-            // "http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=alex-devil&api_key=b0d36553a3d96fb804b15692f31eaf63&format=json"
-        )
+        .get($base_url + "/request/user?uid=" + store.state.id)
         .then((response) => {
-            data.value = response.data.user;
+            console.log($base_url + "/request/user?uid=" + store.state.id);
+            console.log(response.data);
+            data.value = response.data;
         })
         .catch((error) => {
             console.error(error);
         });
-});
+};
+
 </script>
 
 <style>

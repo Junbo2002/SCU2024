@@ -12,7 +12,27 @@ import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 // 引入ECharts
 import * as echarts from "echarts";
 
+// 引入Vuex
+import { createStore } from 'vuex';
+
+// 创建一个新的 store 实例
+const store = createStore({
+  state () {
+    return {
+      id: 0
+    }
+  },
+  mutations: {
+    increment (state, payload) {
+      state.id = payload
+    }
+  }
+})
+
 const app = createApp(App);
+
+// 将 store 实例作为插件安装
+app.use(store)
 
 app.config.globalProperties.$echarts = echarts;
 
