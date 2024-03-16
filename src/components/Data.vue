@@ -87,27 +87,27 @@ import LineChart from "@/components/graph/LineChart.vue";
 
 const activities = [
     {
-        content: "学习阶段",
+        content: "Learning Stage",
         time: "2024-02-26",
         done: true,
     },
     {
-        content: "需求阶段",
+        content: "Requirements Phase",
         done: true,
         time: "2024-04-03",
     },
     {
-        content: "设计阶段",
+        content: "Design Phase",
         done: true,
         time: "2024-04-03",
     },
     {
-        content: "开发阶段",
+        content: "Development Phase",
         done: true,
         time: "2024-03-17",
     },
     {
-        content: "验收阶段",
+        content: "Acceptance Phase",
         done: true,
         time: "2024-03-17",
     },
