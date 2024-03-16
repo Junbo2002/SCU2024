@@ -69,6 +69,8 @@ onMounted(() => {
                     "#a50026cc",
                 ],
             },
+            text: ['High', 'Low'],
+            // calculable: true
         },
         toolbox: {
             show: true,
