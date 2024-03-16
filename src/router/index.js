@@ -4,7 +4,7 @@ import Music from "@/components/recommend/MusicMain.vue";
 import Data from "@/components/Data.vue";
 
 import TrackRank from "@/components/rank/TrackRank.vue";
-import PlaylistRank from "@/components/rank/AlbumRank.vue";
+import UserRank from "@/components/rank/UserRank.vue";
 import ArtistRank from "@/components/rank/ArtistRank.vue";
 
 const router = createRouter({
@@ -21,9 +21,9 @@ const router = createRouter({
                     component: TrackRank,
                 },
                 {
-                    path: "playlistrank",
-                    name: "PlaylistRank",
-                    component: PlaylistRank,
+                    path: "userrank",
+                    name: "UserRank",
+                    component: UserRank,
                 },
                 {
                     path: "artistrank",

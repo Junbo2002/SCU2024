@@ -17,7 +17,7 @@ import { useStore } from "vuex";
 // const data = ref({ name: "" });
 const data = ref();
 
-const store = useStore()
+const store = useStore();
 
 // onMounted(() => {
 //     axios
@@ -36,9 +36,12 @@ onMounted(() => {
     fetchData();
 });
 
-watch(() => store.state.id, () => {
-    fetchData();
-});
+watch(
+    () => store.state.id,
+    () => {
+        fetchData();
+    }
+);
 
 const fetchData = () => {
     axios
@@ -52,7 +55,6 @@ const fetchData = () => {
             console.error(error);
         });
 };
-
 </script>
 
 <style>
@@ -70,7 +72,7 @@ const fetchData = () => {
     }
     font-weight: bold;
     font-size: 2.5vh;
-    margin-left: 65vw;
+    margin-left: 55vw;
 }
 
 .right-text {
