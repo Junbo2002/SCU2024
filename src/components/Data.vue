@@ -29,7 +29,7 @@
         </el-row>
 
         <!-- 项目进度 -->
-        <div class="anchor" style="margin-top: 5vw"># Project progress</div>
+        <div class="anchor" style="margin-top: 6vh"># Project Progress</div>
         <div class="processBox">
             <div class="timelineProcessBox">
                 <el-timeline class="timeline">
@@ -49,7 +49,7 @@
             </div>
         </div>
         <!-- 切换按钮 -->
-        <div class="anchor" style="margin-top: 5vw"># Project Results</div>
+        <div class="anchor" style="margin-top: 8vh"># Project Results</div>
         <el-button type="primary" @click="onClick" round class="clickBtn"
             >Click here to show charts</el-button
         >
