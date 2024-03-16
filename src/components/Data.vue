@@ -1,7 +1,7 @@
 <template>
     <div class="container" v-if="showCtrl">
         <!-- 数据展示 -->
-        <div class="anchor" style="margin-top: 2vw"># Our work</div>
+        <div class="anchor" style="margin-top: 1vw"># Project Workload</div>
         <el-row>
             <el-col :span="8">
                 <el-statistic :value="volume">
@@ -17,23 +17,19 @@
                 </el-statistic>
             </el-col>
             <el-col :span="6">
-                <el-statistic :value="sloc">
-                    <template #title> <div class="title">SLOC</div> </template>
-                </el-statistic>
-            </el-col>
-            <el-col :span="6">
                 <el-statistic :value="rows">
                     <template #title> <div class="title">Rows</div> </template>
                 </el-statistic>
             </el-col>
+            <el-col :span="6">
+                <el-statistic :value="sloc">
+                    <template #title> <div class="title">SLOC</div> </template>
+                </el-statistic>
+            </el-col>
         </el-row>
-        <div style="text-align: center">
-            <el-button type="primary" @click="onClick" round class="clickBtn"
-                >Click here to show charts</el-button
-            >
-        </div>
+
         <!-- 项目进度 -->
-        <div class="anchor" style="margin-top: 6vw"># Project progress</div>
+        <div class="anchor" style="margin-top: 5vw"># Project progress</div>
         <div class="processBox">
             <div class="timelineProcessBox">
                 <el-timeline class="timeline">
@@ -52,6 +48,11 @@
                 </el-timeline>
             </div>
         </div>
+        <!-- 切换按钮 -->
+        <div class="anchor" style="margin-top: 5vw"># Project Results</div>
+        <el-button type="primary" @click="onClick" round class="clickBtn"
+            >Click here to show charts</el-button
+        >
     </div>
 
     <!-- 导航栏 -->
@@ -94,17 +95,17 @@ const activities = [
     {
         content: "Requirements Phase",
         done: true,
-        time: "2024-04-03",
+        time: "2024-03-05",
     },
     {
         content: "Design Phase",
         done: true,
-        time: "2024-04-03",
+        time: "2024-03-07",
     },
     {
         content: "Development Phase",
         done: true,
-        time: "2024-03-17",
+        time: "2024-03-09",
     },
     {
         content: "Acceptance Phase",
@@ -140,8 +141,8 @@ const rows = useTransition(raw_rows, {
 
 raw_volume.value = 9331036512;
 raw_tables.value = 12;
-raw_sloc.value = 2345;
-raw_rows.value = 88888;
+raw_sloc.value = 5744;
+raw_rows.value = 73670661;
 
 // 控制标签切换
 const activeName = ref("first");
@@ -155,6 +156,11 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 .anchor {
     font-size: larger;
     font-weight: bold;
+    transition: 0.2s;
+}
+
+.anchor:hover {
+    color: #409eff;
 }
 
 .demo-tabs {
@@ -181,6 +187,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 }
 .clickBtn {
     height: 3vw;
+    margin-left: 6vw;
     margin-top: 3vw;
     font-size: large;
 }
