@@ -1,12 +1,21 @@
 import json
-import mysql.connector
 import numpy as np
 
+import mysql.connector
+
+DATABASE_CONFIG = {
+    "host": "172.16.0.176",
+    "port": "3306",
+    "user": "root",
+    "passwd": "admin",
+    "database": "minidata"
+}
+
 db = mysql.connector.connect(
-    host="172.16.0.176",  # 数据库主机地址
-    user="root",  # 数据库用户名
-    passwd="admin",  # 数据库密码
-    database="minidata"
+    host=DATABASE_CONFIG["host"],
+    user=DATABASE_CONFIG["user"],
+    passwd=DATABASE_CONFIG["passwd"],
+    database=DATABASE_CONFIG["database"]
 )
 cursor = db.cursor()
 
@@ -90,7 +99,7 @@ def get_avg_playcount_by_nationality():
 
 
 # ========================
-# 映射函数(缩小不同国籍用户播放量的平均值)
+# 映射函数(缩放不同国籍用户播放量的平均值)
 # ========================
 def avgnationplaycount_map(x):
     return -34285 + 2.426457764845094 * x - 5.511744175457289e-06 * x ** 2 + \

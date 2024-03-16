@@ -17,7 +17,8 @@ async def get_track_by_id(mbid: str):
     :param mbid: lastfm官方对歌曲的唯一标识
     :return: {"track": {"name": "song name", ...}}
     """
-    url = f"https://ws.audioscrobbler.com/2.0/?method=track.getInfo&mbid={mbid}&api_key={API_KEY}&format=json"
+    url = f"https://ws.audioscrobbler.com/2.0/?method=track" \
+          f".getInfo&mbid={mbid}&api_key={API_KEY}&format=json"
     res = _request(url)
     return res.json()
 
@@ -39,9 +40,23 @@ async def get_top_artists(limit: int = 5):
     """
     获取top歌手列表
     :param limit: top歌手数量
-    :return: {"artists": {"artist": [{"name": "artist name", "img": "artist img url"}, ...]}}
+    :return: {
+        "artists": {
+            "artist": [
+                {
+                    "name": "The Weeknd",
+                    "playcount": "621398803",
+                    "mbid": "c8b03190-306c-4120-bb0b-6f2ebfc06ea9",
+                    "url": "https://www.last.fm/music/The+Weeknd",
+                    "image": "https://lastfm.freetls.fastly.net/i/u/34s/2a96cbd8b46e442fc41c2b86b821562f.png",
+                    "img": "https://lastfm.freetls.fastly.net/i/u/ar0/725cbf01f1b2b49bf17b3cb6e956283b.jpg"
+                    ...
+                },
+                ...
+    ]}}
     """
-    url = f"https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key={API_KEY}&format=json&limit={limit}"
+    url = f"https://ws.audioscrobbler.com/2.0/?method=chart" \
+          f".gettopartists&api_key={API_KEY}&format=json&limit={limit}"
     res = _request(url).json()
 
     # 获取歌手图片

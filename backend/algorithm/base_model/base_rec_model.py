@@ -9,7 +9,9 @@ class BaseRecModel:
         "user_dict": "user_dict.pkl",
         "tag_dict": "tag_dict.pkl",
         "user_track_matrix": "user_track_matrix.pkl",
-        "track_time_vector": "track_time_vector.pkl"
+        "track_time_vector": "track_time_vector.pkl",
+        "user_skip_track": "user_skip_track.pkl",
+        "user_track_prefer": "user_track_prefer.pkl"
     }
 
     def __init__(self):
@@ -53,6 +55,16 @@ class BaseRecModel:
 
     def _get_track_time_vector(self):
         data_path = self.base_path + self.file_map["track_time_vector"]
+        data = self._load_pickle(data_path)
+        return data
+
+    def _get_user_skip_track(self):
+        data_path = self.base_path + self.file_map["user_skip_track"]
+        data = self._load_pickle(data_path)
+        return data
+
+    def _get_user_track_prefer(self):
+        data_path = self.base_path + self.file_map["user_track_prefer"]
         data = self._load_pickle(data_path)
         return data
 
