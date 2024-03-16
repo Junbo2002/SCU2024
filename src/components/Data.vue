@@ -17,13 +17,13 @@
                 </el-statistic>
             </el-col>
             <el-col :span="6">
-                <el-statistic :value="sloc">
-                    <template #title> <div class="title">SLOC</div> </template>
+                <el-statistic :value="rows">
+                    <template #title> <div class="title">Rows</div> </template>
                 </el-statistic>
             </el-col>
             <el-col :span="6">
-                <el-statistic :value="rows">
-                    <template #title> <div class="title">Rows</div> </template>
+                <el-statistic :value="sloc">
+                    <template #title> <div class="title">SLOC</div> </template>
                 </el-statistic>
             </el-col>
         </el-row>
@@ -140,8 +140,8 @@ const rows = useTransition(raw_rows, {
 
 raw_volume.value = 9331036512;
 raw_tables.value = 12;
-raw_sloc.value = 2345;
-raw_rows.value = 88888;
+raw_sloc.value = 5744;
+raw_rows.value = 73670661;
 
 // 控制标签切换
 const activeName = ref("first");
