@@ -44,11 +44,12 @@ onMounted(() => {
 
     const option = {
         title: {
-            text: "Listener vs. Plays",
+            text: "Listener vs. Play",
             left: "left",
         },
         xAxis: {
             type: "category",
+            name: "play",
             // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             axisLabel: {
                 rotate: 90,
@@ -56,6 +57,7 @@ onMounted(() => {
         },
         yAxis: {
             type: "value",
+            name: "listener",
         },
         grid: {
             top: "13%",

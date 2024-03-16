@@ -54,8 +54,11 @@ onMounted(() => {
             trigger: "item",
         },
         legend: {
-            top: "5%",
+            top: "10%",
             left: "center",
+            textStyle: {
+                fontSize: 13
+            }
         },
         series: [
             {
