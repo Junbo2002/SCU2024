@@ -20,16 +20,24 @@ class ItemCFModel(BaseRecModel):
         if filtered_tracks is None:
             raise ValueError("filtered_tracks can not be None for ItemCFModel")
 
+        # 1. 获取过滤出音乐的tag向量
         user_idx = self.user_dict[user_id]
         track_user_matrix = self.track_user_matrix[filtered_tracks]  # [1000, 24184]
-        user_track = self.user_track_matrix[user_idx, filtered_tracks]
-        item_sim = cosine_similarity(track_user_matrix, dense_output=True)
 
-        # 对角线置0
+        # 2. 计算音乐之间的相似度
+        item_sim = cosine_similarity(track_user_matrix, dense_output=True)
+        # 对角线置0，防止自己和自己相似度最高
         np.fill_diagonal(item_sim, 0)
+
+        # 3. 获取用户的播放列表
+        user_track = self.user_track_matrix[user_idx, filtered_tracks]
+
         # 矩阵转ndarray
         user_track = user_track.T.todense().A  # [1000, 1]
+        # 4. 计算用户对每首歌的兴趣度
         item_sim = (user_track * item_sim).sum(0)  # [1000, 24184]
+
+        # 5. 取top_n的歌曲
         top_n_idx = np.argpartition(item_sim, -top_n)[-top_n:]
         sims = np.zeros_like(item_sim)
         sims[top_n_idx] = item_sim[top_n_idx]

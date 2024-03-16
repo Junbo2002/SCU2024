@@ -90,13 +90,12 @@ def get_avg_playcount_by_nationality():
 
 
 # ========================
-# 映射函数
+# 映射函数(缩小不同国籍用户播放量的平均值)
 # ========================
 def avgnationplaycount_map(x):
     return -34285 + 2.426457764845094 * x - 5.511744175457289e-06 * x ** 2 + \
         5.310121419737438e+05 * x ** -1 + 3.796465649065208e+04 * x ** -2
 
-# print(avgnationplaycount_map(10000))
 
 # ========================
 # 不同国籍用户数量
@@ -236,6 +235,14 @@ def get_username_by_id(uid):
     return res[0][0] if res else None
 
 
+# ========================
+# 获取所有用户id
+# ========================
+def get_all_users():
+    sql = f'SELECT id FROM `user`'
+    cursor.execute(sql)
+    res = cursor.fetchall()
+    return [i[0] for i in res]
 
 if __name__ == '__main__':
     #  [18, 35, 50]

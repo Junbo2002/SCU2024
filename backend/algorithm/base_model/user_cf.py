@@ -20,6 +20,7 @@ class UserCFModel(BaseRecModel):
         """
         if filtered_tracks is None:
             raise ValueError("filtered_tracks can not be None for UserCFModel")
+
         # 1. 获取用户的tag向量
         user_idx = self.user_dict[user_id]
         user_tag_vector = self.user_tags[user_idx]  # [1, 3865]
@@ -29,16 +30,18 @@ class UserCFModel(BaseRecModel):
         user_sim = user_sim.squeeze(0)
         # 除去自己
         user_sim[user_idx] = 0.
-
+        # 取相似度最高的neighbor_num个用户
         neighbor_idx = np.argpartition(user_sim, -neighbor_num)[-neighbor_num:]
 
         # 3. 获取neighbor_num用户的播放列表
         user_tracks = self.user_track_matrix[np.ix_(neighbor_idx, filtered_tracks)]  # [1000, 1000]
         user_sim = user_sim[neighbor_idx].reshape(-1,1)  # [1000, 1]
-        # 加权求和
-        # np.multiply(user_tracks.todense(), user_sim)
+
+        # 4. 计算用户对每首歌的兴趣度
         user_tracks = np.multiply(user_sim, user_tracks.todense()).sum(0)  # [1000,]
         user_tracks = np.array(user_tracks).reshape(-1)
+
+        # 5. 取top_n的歌曲
         top_n_idx = np.argpartition(user_tracks, -top_n)[-top_n:]
         sims = np.zeros_like(user_tracks)
         sims[top_n_idx] = user_tracks[top_n_idx]

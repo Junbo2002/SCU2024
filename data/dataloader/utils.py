@@ -1,5 +1,6 @@
 import json
 
+
 def replace_quoto(s: str):
     key = "junbo"
 

@@ -12,7 +12,8 @@ class PopularModel(BaseRecModel):
 
     def recall(self, user_id, top_n, filtered_tracks=None):
         """
-        与用户无关，返回热门的top_n个歌曲
+        与用户无关，返回热门的top_n个歌曲(热度作为概率，随机选择)
+        保留多样性的同时，保证热门歌曲的覆盖
         """
         sims = np.zeros(len(self.track_ids))
         index = self._random_select(top_n)
@@ -36,7 +37,6 @@ class PopularModel(BaseRecModel):
         # {"111": 123, "222": 456, "333": 789}  id: playcount
         # 根据playcount的大小作为概率，随机选择top_n个
         size = min(top_n, len(self.track_ids))
-        # np.random.seed(0)
         index = np.random.choice(len(self.track_probs), size=size, replace=False, p=self.track_probs.ravel())
         return index
 

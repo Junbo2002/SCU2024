@@ -9,27 +9,38 @@ router = APIRouter()
 API_KEY = "b0d36553a3d96fb804b15692f31eaf63"
 artist_url_img_map = json.load(open("assets/data/artist_url_map.json", "r"))
 
-# @lru_cache(maxsize=128)
 
-# 根据歌曲mbid获取歌曲信息  /tracks/mbid
-@router.get("/request/track/{mbid}", tags=["tracks"])
+@router.get("/request/track/{mbid}", tags=["requests"])
 async def get_track_by_id(mbid: str):
+    """
+    根据歌曲 mbid 获取歌曲信息
+    :param mbid: lastfm官方对歌曲的唯一标识
+    :return: {"track": {"name": "song name", ...}}
+    """
     url = f"https://ws.audioscrobbler.com/2.0/?method=track.getInfo&mbid={mbid}&api_key={API_KEY}&format=json"
     res = _request(url)
     return res.json()
 
 
-# 根据用户名获取用户信息  /users/username
-@router.get("/request/user/{username}", tags=["tracks"])
+@router.get("/request/user/{username}", tags=["requests"])
 async def get_user_by_name(username: str):
+    """
+    根据用户名获取用户信息
+    :param username: 用户名
+    :return: {"user": {"name": "elchode", ...}}
+    """
     url = f"https://ws.audioscrobbler.com/2.0/?method=user.getInfo&user={username}&api_key={API_KEY}&format=json"
     res = _request(url)
     return res.json()
 
 
-# top歌手列表
-@router.get("/request/topartists", tags=["tracks"])
+@router.get("/request/topartists", tags=["requests"])
 async def get_top_artists(limit: int = 5):
+    """
+    获取top歌手列表
+    :param limit: top歌手数量
+    :return: {"artists": {"artist": [{"name": "artist name", "img": "artist img url"}, ...]}}
+    """
     url = f"https://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key={API_KEY}&format=json&limit={limit}"
     res = _request(url).json()
 
@@ -45,19 +56,30 @@ async def get_top_artists(limit: int = 5):
     return res
 
 
-@lru_cache(maxsize=256)
+@lru_cache(maxsize=512)
 def _request(url: str):
+    """
+    请求封装,方便使用 LRU 缓存
+    :param url: 请求地址
+    :return: 请求结果
+    """
+
+    # 添加代理
     proxies = {
         "http": "http://localhost:6666",
         "https": "http://localhost:6666"
     }
     res = requests.get(url, proxies=proxies)
-    # print(url)
     return res
 
 
-@lru_cache(maxsize=32)
+@lru_cache(maxsize=128)
 def _get_artist_img(url):
+    """
+    获取歌手图片
+    :param url: 歌手链接地址
+    :return: 歌手图片地址
+    """
     return BeautifulSoup(requests.get(url).text, 'html.parser') \
         .find("div", class_="header-new-background-image").get('content')
 

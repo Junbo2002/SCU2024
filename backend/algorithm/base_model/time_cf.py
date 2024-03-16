@@ -19,17 +19,19 @@ class TimeCFModel(BaseRecModel):
         if filtered_tracks is None:
             raise ValueError("filtered_tracks can not be None for **TimeCFModel**")
 
-        # 获取当前时间特征：月份 & 小时
+        # 1. 获取当前时间特征：月份 & 小时
         now = datetime.now()
         month, hour = now.month, now.hour
         time_vector = [0] * len(self.track_time_vector[0])
         time_vector[month - 1] = 1
         time_vector[hour + 12] = 1
 
+        # 2. 计算过滤出的歌曲和当前时间的时间相似度
         track_time_vector = self.track_time_vector[filtered_tracks]  # [1000, 36]
         time_vector = np.array(time_vector).reshape(1, -1)
         time_sim = cosine_similarity(time_vector, track_time_vector)[0]
 
+        # 3. 取top_n的歌曲
         top_n_idx = np.argpartition(time_sim, -top_n)[-top_n:]
         # print("time_cf:", top_n_idx)
         sims = np.zeros_like(time_sim)

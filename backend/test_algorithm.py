@@ -1,6 +1,12 @@
 from algorithm import FinalModel
+from database import get_all_users
+from tqdm import tqdm
+
 
 model = FinalModel()
-res = model.recall("10020", 10)
+users = get_all_users()
 
-print(res)
+# 测试推荐算法效率
+for user_id in tqdm(users):
+    res = model.recall(user_id, 10)
+    # print(res)

@@ -24,16 +24,12 @@ class TagModel(BaseRecModel):
         """
         根据用户喜欢的歌曲获得用户标签，然后计算用户标签与歌曲标签的相似度，返回top_n的歌曲
         """
-        user_idx = self.user_dict[user_id]
-        # sim = self.user_item_sim[user_idx].todense()
-        # top_n_idx = np.argpartition(sim, -top_n)[0, -top_n:]
-        # sims = sim[0, top_n_idx]
-
-        # 提前存储相似度矩阵
-        # file = f"datasets/user_item_sim/{user_id}.npy"
-        # sim = np.load(file)
-        sim = cosine_similarity(self.user_tags[0], self.item_tags, dense_output=True)
+        # 1. 获取用户的tag向量
+        user_tag = self.user_tags[0]  # [1, 3865]
+        sim = cosine_similarity(user_tag, self.item_tags, dense_output=True)
         sim = sim.squeeze(0)
+
+        # 2. 取top_n的歌曲
         top_n_idx = np.argpartition(sim, -top_n)[-top_n:]
         sims = np.zeros_like(sim)
         sims[top_n_idx] = sim[top_n_idx]

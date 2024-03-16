@@ -18,7 +18,7 @@ class BaseLoader:
         self.sql = f"""INSERT INTO {self.table_name} ({', '.join(self.columns)})
 VALUES"""
     
-    def _sql_close(self) -> str:
+    def _sql_close(self):
         self.sql = self.sql.strip(',') + ";"
     
     def _get_item(self, line) -> dict:

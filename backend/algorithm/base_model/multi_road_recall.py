@@ -21,8 +21,9 @@ class MultiRoadRecallModel(BaseRecModel):
                 raise TypeError("model must be an instance of BaseRecModel")
 
             recall_res = model.recall(user_id, top_n, filtered_tracks=filtered_tracks)
-            # normalize !!!
-            recall_res = recall_res / (recall_res.sum() + 1e-5)
+            # 特征归一化（平等考虑每个子模型权重）
+            recall_res = recall_res / (recall_res.sum() + 1e-5)  # 防止除0
+            # 其他归一化方法
             # recall_res = \
             #     (recall_res - recall_res.mean()) / recall_res.std()
             recall_lst.append(recall_res)

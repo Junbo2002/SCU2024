@@ -2,10 +2,19 @@ import pickle
 
 
 class BaseRecModel:
+    # 统一管理数据文件路径映射
+    file_map = {
+        "item_tags": "track_tag_vector.pkl",
+        "user_tags": "user_tag_vector.pkl",
+        "user_dict": "user_dict.pkl",
+        "tag_dict": "tag_dict.pkl",
+        "user_track_matrix": "user_track_matrix.pkl",
+        "track_time_vector": "track_time_vector.pkl"
+    }
+
     def __init__(self):
         # self.base_path = "dataset/data/"  # for algorithm
         self.base_path = "algorithm/dataset/data/"  # for backend
-        pass
 
     def recall(self, user_id, top_n, filtered_tracks=None):
         """
@@ -18,37 +27,36 @@ class BaseRecModel:
     # ====================
 
     def _get_item_tags(self) -> list:
-        data_path = self.base_path + "track_tag_vector.pkl"
-        with open(data_path, 'rb') as f:
-            item_tags = pickle.load(f)
-        return item_tags
+        data_path = self.base_path + self.file_map["item_tags"]
+        data = self._load_pickle(data_path)
+        return data
 
     def _get_user_tags(self) -> list:
-        data_path = self.base_path + "user_tag_vector.pkl"
-        with open(data_path, 'rb') as f:
-            user_tags = pickle.load(f)
-        return user_tags
+        data_path = self.base_path + self.file_map["user_tags"]
+        data = self._load_pickle(data_path)
+        return data
 
     def _get_user_dict(self) -> dict:
-        data_path = self.base_path + "user_dict.pkl"
-        with open(data_path, 'rb') as f:
-            user_dict = pickle.load(f)
-        return user_dict
+        data_path = self.base_path + self.file_map["user_dict"]
+        data = self._load_pickle(data_path)
+        return data
 
-    def _get_tag_dict(self) -> dict:
-        data_path = self.base_path + "tag_dict.pkl"
-        with open(data_path, 'rb') as f:
-            tag_dict = pickle.load(f)
-        return tag_dict
+    def _get_tag_dict(self):
+        data_path = self.base_path + self.file_map["tag_dict"]
+        data = self._load_pickle(data_path)
+        return data
 
     def _get_user_track_matrix(self):
-        data_path = self.base_path + "user_track_matrix.pkl"
-        with open(data_path, 'rb') as f:
-            user_track_matrix = pickle.load(f)
-        return user_track_matrix
+        data_path = self.base_path + self.file_map["user_track_matrix"]
+        data = self._load_pickle(data_path)
+        return data
 
     def _get_track_time_vector(self):
-        data_path = self.base_path + "track_time_vector.pkl"
+        data_path = self.base_path + self.file_map["track_time_vector"]
+        data = self._load_pickle(data_path)
+        return data
+
+    def _load_pickle(self, data_path):
         with open(data_path, 'rb') as f:
-            track_time_vector = pickle.load(f)
-        return track_time_vector
+            data = pickle.load(f)
+        return data
