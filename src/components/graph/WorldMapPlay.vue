@@ -69,7 +69,7 @@ onMounted(() => {
                     "#a50026cc",
                 ],
             },
-            text: ['High', 'Low'],
+            text: ["High", "Low"],
             // calculable: true
         },
         toolbox: {
@@ -94,7 +94,7 @@ onMounted(() => {
                 map: "World",
                 emphasis: {
                     label: {
-                        show: false,
+                        show: true,
                     },
                 },
             },
