@@ -12,7 +12,11 @@
         <el-table-column prop="gender" label="Gender" :formatter="formatter" width="150" />
         <el-table-column prop="age" label="Age" :formatter="formatter" width="150" />
         <el-table-column prop="country" label="Country" :formatter="formatter" width="150" />
-        <el-table-column prop="playcount" label="Playcount" width="150" />
+        <el-table-column
+            prop="playcount"
+            label="Playcount"
+            :formatter="number_formatter"
+            width="150" />
         <el-table-column prop="subscribertype" label="Subscribertype">
             <template #default="scope">
                 <el-tag v-if="scope.row.subscribertype === 'base'" type="success">{{
@@ -36,6 +40,10 @@ const formatter = (row, column, cellValue) => {
         return "-";
     }
     return cellValue;
+};
+
+const number_formatter = (row, col, cellValue) => {
+    return new Intl.NumberFormat("en-US").format(cellValue);
 };
 
 onMounted(() => {

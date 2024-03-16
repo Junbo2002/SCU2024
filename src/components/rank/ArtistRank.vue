@@ -15,8 +15,16 @@
                 </div>
             </template>
         </el-table-column>
-        <el-table-column prop="listeners" label="Listeners" width="150" />
-        <el-table-column prop="playcount" label="Playcount" width="150" />
+        <el-table-column
+            prop="listeners"
+            label="Listeners"
+            :formatter="number_formatter"
+            width="150" />
+        <el-table-column
+            prop="playcount"
+            label="Playcount"
+            :formatter="number_formatter"
+            width="150" />
         <el-table-column label="Url">
             <template #default="scope">
                 <el-link type="primary" :href="scope.row.url">{{ scope.row.url }}</el-link>
@@ -29,6 +37,10 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { $base_url } from "@/assets/theme";
+
+const number_formatter = (row, col, cellValue) => {
+    return new Intl.NumberFormat("en-US").format(cellValue);
+};
 
 const tableData = ref([]);
 onMounted(() => {

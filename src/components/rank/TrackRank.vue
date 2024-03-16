@@ -24,7 +24,11 @@
             label="Duration"
             :formatter="duration_formatter"
             width="120" />
-        <el-table-column prop="playcount" label="Playcount" width="120" />
+        <el-table-column
+            prop="playcount"
+            label="Playcount"
+            width="120"
+            :formatter="number_formatter" />
         <!-- 还可以放点tag -->
         <el-table-column label="Tags">
             <template #default="scope">
@@ -59,6 +63,10 @@ const duration_formatter = (row, column, cellValue) => {
     const formattedMinutes = String(minutes).padStart(2, "0");
     const formattedSeconds = String(remainingSeconds).padStart(2, "0");
     return `${formattedMinutes}:${formattedSeconds}`;
+};
+
+const number_formatter = (row, col, cellValue) => {
+    return new Intl.NumberFormat("en-US").format(cellValue);
 };
 
 const tableData = ref([]);
